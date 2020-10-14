@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-10-14T23:43:50+03:00",
+  "id": "test-codelab",
+  "duration": 5,
+  "title": "Test Codelab",
+  "summary": "A test codelab implementation",
+  "source": "test-codelab.md",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [
+    "java"
+  ],
+  "feedback": "https://github.com/robert-marius-draghici/my-codelabs/issues",
+  "url": "test-codelab"
+}
