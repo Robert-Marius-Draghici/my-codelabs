@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -21,7 +21,7 @@
       containsPresentation, containsDemo }) {
 
       return `<div class="w3-card-4">
-                <header class="w3-container w3-theme" style="height: 50px;overflow: hidden;">
+                <header class="w3-container w3-theme-d4" style="height: 50px;overflow: hidden;">
                   <h3>${title}</h3>
                 </header>
                 <div class="w3-container w3-text-theme w3-center" style="height:300px;overflow-x:auto;">
@@ -30,11 +30,11 @@
                   </p>
                   <div class="w3-section" style="height:50px;">
                     ${containsPresentation ? `<a href=${presentationLink} class="w3-button w3-indigo">presentation</a>` : ''}
-                    <a href=${codelabLink} class="w3-button w3-theme">codelab</a>
+                    <a href=${codelabLink} class="w3-button w3-theme-d4">codelab</a>
                     ${containsDemo ? `<a href=${demoLink} class="w3-button w3-grey">demo</a>` : ''}
                   </div>
                 </div>
-                <footer class="w3-bar w3-theme" style="padding: 0 15px;">
+                <footer class="w3-bar w3-theme-d4" style="padding: 0 15px;">
                   <span>${createdDate}</span>
                   <span style="float:right">${author? author : ""}</span>
                 </footer>
