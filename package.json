@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@dxdeveloperexperience/codelab-generator": "^1.0.7",
+    "common": "^0.2.5",
     "rimraf": "^3.0.2"
   }
 }
