@@ -22,7 +22,7 @@
     ],
     "feedback": "https://github.com/robert-marius-draghici/my-codelabs/issues",
     "url": "flutter-tutorial",
-    "containsPresentation": false,
+    "containsPresentation": true,
     "containsDemo": false
   },
   {
