@@ -27,7 +27,7 @@
                   environment="web"
                   feedback-link="https://github.com/robert-marius-draghici/my-codelabs/issues">
     
-      <google-codelab-step label="What is Flutter?" duration="1">
+      <google-codelab-step label="Part 1: Introduction to Flutter" duration="1">
         <p>Flutter is a free and open-source, cross-platform development framework created by Google. It is used to develop high-performance, native mobile applications for iOS and Android from a single code base. Apart from mobile platforms, it can also be used to develop applications for Windows, Mac, Linux, Google Fuchsia OS and the web.</p>
 
 
@@ -59,7 +59,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Create a Hello World project in Flutter." duration="10">
+      <google-codelab-step label="Part 2: Create a Hello World project in Flutter." duration="10">
         <p>Follow the instructions from <a href="https://flutter.dev/docs/get-started/test-drive?tab=androidstudio#androidstudio" target="_blank">here</a> in order to create a new application, which will be named hello_flutter.</p>
 <p>Remove the widget_test.dart file as it will not be required for the moment. Remove the starting code from main.dart and replace with the following:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;; // #1
@@ -76,19 +76,19 @@ void main() { // #2
 }
 </code></pre>
 <ol type="1">
-<li>This package contains Widgets that implement Material design, a design language developed by Google. A package is simply a library of functions.</li>
+<li>This package contains widgets that implement Material design, a design language developed by Google. A package is simply a library of functions.</li>
 <li>The main method is the entry point of a Flutter app.</li>
-<li>The runApp method inflates a Widget and attaches it to the screen. In other words, it will show on the screen the Widget passed to this method.</li>
-<li>Everything in Flutter is a Widget so Center and Text are Widgets. The new keyword is not needed anymore in later versions of Flutter. Center is a container Widget that centers its content onto the screen both horizontally and vertically.</li>
-<li>The child property allows us to nest Widgets inside other Widgets. Text is just a text box.</li>
-<li>The Text Widget requires that a text direction is specified.</li>
+<li>The runApp method inflates a widget and attaches it to the screen. In other words, it will show on the screen the widget passed to this method.</li>
+<li>Everything in Flutter is a widget so Center and Text are widgets. The new keyword is not needed anymore in later versions of Flutter. Center is a container widget that centers its content onto the screen both horizontally and vertically.</li>
+<li>The child property allows us to nest widgets inside other widgets. Text is just a text box.</li>
+<li>The Text widget requires that a text direction is specified.</li>
 </ol>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Enhance the design of the Flutter App." duration="10">
-        <p>In order to enhance the design of the application, we can use a MaterialApp Widget to wrap the other widgets. The MaterialApp Widget is an application that uses material design and wraps a number of widgets that are commonly required for material design applications. The MaterialApp allows us to customize our application with its properties.</p>
+        <p>In order to enhance the design of the application, we can use a MaterialApp widget to wrap the other widgets. The MaterialApp widget is an application that uses material design and wraps a number of widgets that are commonly required for material design applications. The MaterialApp allows us to customize our application with its properties.</p>
 <p>Modify the code as follows:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
 
@@ -108,15 +108,15 @@ void main() {
 }
 </code></pre>
 <ol type="1">
-<li>The MaterialApp Widget is usually the container of the other widgets in our application. It allows us to customize our application by adding a title, background color and others. It can also be useful for navigation and routing.</li>
+<li>The MaterialApp widget is usually the container of the other widgets in our application. It allows us to customize our application by adding a title, background color and others. It can also be useful for navigation and routing.</li>
 <li>The title of the application. This is the title that the operating system will see.</li>
 <li>The home property is the widget for the default route of the app. This is the route that is displayed first when the application is started normally, unless initialRoute is specified.</li>
 <li>The Material class allows us to specify the color of its content (the background color in our example). Other properties are: shape, shadow, elevation and other properties that change the way it behaves.</li>
-<li>Previously the Center Widget was passed directly to the runApp method. However, in Flutter Widgets can be nested using the child property.</li>
+<li>Previously the Center widget was passed directly to the runApp method. However, in Flutter widgets can be nested using the child property.</li>
 <li>Specify some style properties for the text. The fontSize requires a double.</li>
 </ol>
 <h2 is-upgraded>Adding an application bar</h2>
-<p>The next step is to add an application bar. This is done by using the Scaffold Widget. The Scaffold class implements the basic material design visual layout structure. It provides APIs for showing drawers, snack bars and bottom sheets among others.</p>
+<p>The next step is to add an application bar. This is done by using the Scaffold widget. The Scaffold class implements the basic material design visual layout structure. It provides APIs for showing drawers, snack bars and bottom sheets among others.</p>
 <p>Modify the code to look like this:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
 
@@ -148,8 +148,8 @@ void main() {
     
       <google-codelab-step label="Code organization for a Flutter application." duration="10">
         <p>Even though we can write the entire application code in the runApp method, this is not recommended especially if the application grows over time. In general, the main method should be as simple as possible.</p>
-<p>The Flutter framework is written in the Dart programming language, which is an object-oriented language. This means that a Widget is nothing more than an object, an instance of a class. Although the Flutter framework provides many Widgets, we can also create our own.</p>
-<p>In order to simplify the main method, we will create a new class called HelloFlutterApp and move the application code in this class. The HelloFlutterApp class will extend the StatelessWidget abstract class, which is a generic Widget that does not have any state. Then, the HelloFlutterApp class needs to override the build method of the superclass. We move the MaterialApp Widget from main to the build method and in the runApp method we return a new instance of HelloFlutterApp. Also, we can further simplify the main method by using the arrow notation.</p>
+<p>The Flutter framework is written in the Dart programming language, which is an object-oriented language. This means that a widget is nothing more than an object, an instance of a class. Although the Flutter framework provides many widgets, we can also create our own.</p>
+<p>In order to simplify the main method, we will create a new class called HelloFlutterApp and move the application code in this class. The HelloFlutterApp class will extend the StatelessWidget abstract class, which is a generic widget that does not have any state. Then, the HelloFlutterApp class needs to override the build method of the superclass. We move the MaterialApp widget from main to the build method and in the runApp method we return a new instance of HelloFlutterApp. Also, we can further simplify the main method by using the arrow notation.</p>
 <p>The code should look like this:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
 
@@ -180,7 +180,7 @@ class HelloFlutterApp extends StatelessWidget { // #2
 <li>The class holding the definition of our application.</li>
 <li>The build method inherited from StatelessWidget needs to be implemented, because it is an abstract method.</li>
 </ol>
-<p>To further modularize the code, we can create a file for each class and files could be structured in packages such as screens, pages etc. For our application, we want to have the home screen (the material Widget in the home property)in a separate file.</p>
+<p>To further modularize the code, we can create a file for each class and files could be structured in packages such as screens, pages etc. For our application, we want to have the home screen (the material widget in the home property)in a separate file.</p>
 <p>Create a new folder called screens in the lib directory. Then create a file home.dart and a class Home and move the code from the body property in the build method of the Home class.</p>
 <p>The home.dart file should look like this:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
@@ -279,6 +279,342 @@ class Home extends StatelessWidget {
 <li>Replace the hard-coded String with the one returned by the sayHello method.</li>
 <li>We want the minutes to be shown in two digits.</li>
 </ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 3: The Basic Widgets of Flutter" duration="2">
+        <p>Flutter provides a set of basic Widgets that can be used along with Scaffold and AppBar in order to develop applications. This basic Widgets include:</p>
+<ul>
+<li>Container</li>
+<li>Text</li>
+<li>Row and Column</li>
+<li>Image</li>
+<li>RaisedButton</li>
+<li>AlertDialog</li>
+<li>Box Constraints</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Container" duration="7">
+        <p>Container is a widget class that allows you to customize its child widget through its properties. It can be seen as the equivalent of the div class from html. The Container widget allows us to specify properties such as:</p>
+<ul>
+<li>alignment = aligns the child widget within the container.</li>
+<li>color = the background color of the container.</li>
+<li>constraints = additional constraints to apply to the child widget.</li>
+<li>clipBehaviour = describes the clip behaviour when Container.decoration is not null.</li>
+<li>decoration = the decoration to paint behind the child widget.</li>
+<li>foregroundDecoration = the decoration to paint in front of the child widget.</li>
+<li>height and width = specifies the container size and is affected by box constraints. If we view the widget as a box, then the box constraints are the minimum and maximum width and height of the widget. Some widgets impose their constraints on their child widgets, which means that the child&#39;s width and height parameters are ignored, while other widgets (such as Center) loosen their constraints so that the maximum is preserved but the minimum is ignored.</li>
+<li>margin = the distance between a widget and the other widgets on the screen.</li>
+<li>padding = the distance between the content of a widget and its borders.11</li>
+</ul>
+<p>Both margin and padding use the EdgeInsets.All(10.0) constructor which creates a margin or padding on all 4 sides of a box.</p>
+<p>Container widget example:</p>
+<pre><code>Container(
+  alignment: Alignment.center,
+  color: Colors.teal,
+  width: 192.0,
+  height: 96.0,
+  child: Text(&#34;This is a container widget&#34;, textDirection: TextDirection.ltr,)
+)
+</code></pre>
+<p>More details about the Container widget can be found <a href="https://api.flutter.dev/flutter/widgets/Container-class.html" target="_blank">here</a> .</p>
+<p>More details about box constraints can be found <a href="https://flutter.dev/docs/development/ui/layout/box-constraints" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Text" duration="7">
+        <p>The Text widget displays a string of text with a single style. The string can be single line or multiline. The Text widget provides properties such as:</p>
+<ul>
+<li>data = the string of text to be displayed.</li>
+<li>textDirection = the directionality of the text such as left-to-right or right-to-left.</li>
+<li>style = a TextStyle object which describes how to format and paint text. It has properties such as fontSize, decoration, fontFamily and weight.</li>
+</ul>
+<p>Text widget example:</p>
+<pre><code>Text(
+  &#34;This is a text widget.&#34;,
+  textDirection: TextDirection.ltr,
+  style: TextStyle(
+	  fontSize: 50,
+	  decoration: TextDecoration.none,
+	  fontFamily: &#39;Schyler&#39;,
+	  fontWeight: FontWeight.normal),
+)
+</code></pre>
+<p>If we want to use a custom font, we have to:</p>
+<ol type="1">
+<li>import the font files. Font files can be downloaded from https://fonts.google.com/ and the .ttf files must be added in the fonts folder.</li>
+<li>declare the font in the pubspec.yaml file. The pubspec.yaml file contains information about project metadata and dependencies. Example of font definition:<pre><code>fonts:
+    - family: Oswald
+        fonts:
+            - asset: fonts/Oswald-Regular.ttf
+            - asset: fonts/Oswald-Medium.ttf
+              style: italic
+            - asset: fonts/Oswald-Light.ttf
+              weight: 300
+            - asset: fonts/Oswald-ExtraLight.ttf
+              weight: 100
+            - asset: fonts/Oswald-SemiBold.ttf
+              weight: 600
+            - asset: fonts/Oswald-Bold.ttf
+              weight: 800
+</code></pre>
+</li>
+<li>use the font in the widget.</li>
+</ol>
+<p>More details about the Text widget can be found <a href="https://api.flutter.dev/flutter/widgets/Text-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Row and Column" duration="5">
+        <p>The Row and Column widgets allow us to better group the widgets in an application. The Row widget is a list of child widgets placed horizontally, while the Column widget is a list of child widgets placed vertically. Since these widgets contain an array of widgets, they have a children property instead of a child property.</p>
+<p>Row widget example:</p>
+<pre><code>Row(
+  children: [
+	Text(
+	  &#34;This is the first row.&#34;,
+	  textDirection: TextDirection.ltr,
+	),
+	Expanded( // #1
+		child: Text(
+	  &#34;This is the second row.&#34;,
+	  textDirection: TextDirection.ltr,
+	)),
+  ],
+)
+</code></pre>
+<ol type="1">
+<li>If there are more children in a Row that will not fit in the available room, we can wrap the children widgets in an Expanded widget which will expand the content of the widget in order to fit the available space.</li>
+</ol>
+<p>Column widget example:</p>
+<pre><code>Column(
+  children: [
+	Row(children: [...]),
+	Row(children: [...]),
+  ],
+)
+</code></pre>
+<p>More details about the Row widget can be found <a href="https://api.flutter.dev/flutter/widgets/Row-class.html" target="_blank">here</a> .</p>
+<p>More details about the Column widget can be found <a href="https://api.flutter.dev/flutter/widgets/Column-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Image" duration="5">
+        <p>The Image widget is used to display an image. The image can come from the following sources:</p>
+<ul>
+<li>a file</li>
+<li>assets which are resources that we add to the project</li>
+<li>the network from an URL</li>
+<li>ImageProvider class</li>
+<li>the memory where it is stored as an Uint8List.</li>
+</ul>
+<p>Flutter accepts images in many formats, however it does not support .svg files yet. Images can be downloaded from <a href="https://openclipart.org/" target="_blank">https://openclipart.org/</a> . To import the images we need to uncomment the assets section from the pubspec.yaml file and add the path to the image:</p>
+<pre><code>  assets:
+   - images/image.png
+</code></pre>
+<p>To use an image imported from the assets, we define an AssetImage object and we pass this object to the Image constructor:</p>
+<pre><code>AssetImage imageAsset = AssetImage(&#39;images/image.png&#39;);
+Image image = Image(image: imageAsset, width: 400.0, height: 400.0);
+</code></pre>
+<p>More details about the Image widget can be found <a href="https://api.flutter.dev/flutter/widgets/Image-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RaisedButton and AlertDialog" duration="5">
+        <p>A raised button is based on a Material widget whose Material.elevation increases when the button is pressed. RaisedButton adds dimension to otherwise mostly flat layouts, such as a long lists of content or wide empty spaces.</p>
+<p>RaisedButton widget example:</p>
+<pre><code>RaisedButton(
+  child: Text(&#34;Raised button&#34;),
+  color: Colors.deepPurple,
+  elevation: 5.0,
+  onPressed: () { // #1
+	callback(context);
+  },
+)
+</code></pre>
+<ol type="1">
+<li>A RaisedButton needs the onPressed property which is an anonymous method that performs an action when the button is pressed. If this property is not set, the button will be flat and greyed out.</li>
+</ol>
+<p>In the callback method we can use an alert dialog to give feedback to the user. An AlertDialog informs the user about situations that require acknowledgement. An alert dialog has an optional title and an optional list of actions. The title is displayed above the content and the actions are displayed below the content.</p>
+<p>AlertDialog widget example:</p>
+<pre><code>var alert = AlertDialog(
+	title: Text(&#34;AlertDialog Title&#34;),
+	content: Text(&#34;AlertDialog Content&#34;), 
+);
+showDialog(
+	context: context,
+	builder: (BuilderContext) =&gt; alert
+);
+</code></pre>
+<p>More details about the RaisedButton widget can be found <a href="https://api.flutter.dev/flutter/material/RaisedButton-class.html" target="_blank">here</a> .</p>
+<p>More details about the AlertDialog widget can be found <a href="https://api.flutter.dev/flutter/material/AlertDialog-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Practical application for Part 3" duration="15">
+        <p>Now we will develop a small application to put in practice all the widgets presented during this part. The application will have one screen which shows some university courses along with their teachers, an image and a raised button to accept the courses presented on the screen.</p>
+<p>We begin with the main method in main.dart.</p>
+<pre><code>import &#39;package:course_management/home.dart&#39;;
+import &#39;package:flutter/material.dart&#39;; // #1
+
+void main() =&gt; runApp(MyApp()); // #2
+
+class MyApp extends StatelessWidget { 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp( // #3
+      title: &#39;University Courses&#39;,
+      home: Home(), // #4
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+</code></pre>
+<ol type="1">
+<li>Import the required packages.</li>
+<li>We want the main function to be as concise as possible so we write the application code in the MyApp class.</li>
+<li>The application uses material design.</li>
+<li>The content for the home screen is in another class, so our code will be more modular.</li>
+</ol>
+<p>After writing the main class, we create the home.dart file where we will write the code for the home screen.</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;; 
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container( // #1
+      child: Column( // #2
+        children: &lt;Widget&gt;[
+          text(&#34;University Courses&#34;, Colors.yellow, &#39;PTSerif&#39;, 50.0, // #3
+              FontWeight.w400),
+          Row(
+            children: &lt;Widget&gt;[
+              Expanded(
+                  child: text(&#34;Subject&#34;, Colors.deepOrange, &#39;PTSerif&#39;, 30.0,
+                      FontWeight.w500)),
+              Expanded(
+                  child: text(&#34;Teacher&#34;, Colors.deepOrange, &#39;PTSerif&#39;, 30.0,
+                      FontWeight.w500)),
+            ],
+          ),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(
+                    &#34;Physics&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+            Expanded(
+                child: text(&#34;Archimedes&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+          ]),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(&#34;Geometry&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+            Expanded(
+                child: text(
+                    &#34;Euclid&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+          ]),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(
+                    &#34;History&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+            Expanded(
+                child: text(&#34;Herodotus&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+          ]),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(
+                    &#34;Biology&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+            Expanded(
+                child: text(&#34;Hippocrates&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+          ]),
+          Row(
+            children: &lt;Widget&gt;[
+              Image(
+                image: AssetImage(&#39;images/university.png&#39;),
+                width: 200.0,
+                height: 200.0,
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          Row(
+            children: &lt;Widget&gt;[
+              RaisedButton(
+                child: Text(&#34;Accept courses&#34;),
+                color: Colors.lime,
+                elevation: 5.0,
+                onPressed: () {
+                  onPressed(context);
+                },
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        ],
+      ),
+      color: Colors.teal,
+      padding: EdgeInsets.all(10.0),
+    );
+  }
+
+  Widget text(String data, MaterialColor color, String fontFamily,
+      double fontSize, FontWeight fontWeight) {
+    return Text(data,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          decoration: TextDecoration.none,
+          color: color,
+          fontFamily: fontFamily,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        ));
+  }
+
+  void onPressed(BuildContext context) { // #4
+    var alert = AlertDialog(
+      title: Text(&#34;Accept courses&#34;),
+      content: Text(&#34;Courses accepted.&#34;),
+    );
+    showDialog(context: context, builder: (BuildContext) =&gt; alert);
+  }
+}
+</code></pre>
+<ol type="1">
+<li>We wrap the widgets composing the screen in a Container widget.</li>
+<li>We use rows and columns to group the different elements on the screen.</li>
+<li>Since there are many text fields in this application, we moved the Text widget in a separate method with the required parameters in order to avoid duplicating code.</li>
+<li>The onPressed function is called whenever the button is pressed.</li>
+</ol>
+<p>Since we use a custom font and an image, we also need to update the assets and fonts sections of the pubspec.yml file.</p>
+<pre><code>  ...
+  assets:
+   - university.png
+  ...
+  fonts:
+  - family: PTSerif
+   fonts:
+     - asset: fonts/PTSerif-Regular.ttf
+     - asset: fonts/PTSerif-Italic.ttf
+       style: italic
+     - asset: fonts/PTSerif-Bold.ttf
+       weight: 700
+     - asset: fonts/PTSerif-BoldItalic.ttf
+       style: italic
+       weight: 700
+  ...
+</code></pre>
+<p>The final application should look like this:</p>
+<p class="image-container"><img alt="flutter app" src="img/63ad6f5d5c0c6f7b.png"><img alt="flutter app" src="img/8f397d9c5a60be14.png"></p>
 
 
       </google-codelab-step>
