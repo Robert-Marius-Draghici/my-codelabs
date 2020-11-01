@@ -17,7 +17,7 @@ It is used to develop high-performance, native mobile applications for iOS and A
 Apart from mobile platforms, it can also be used to develop applications for Windows, Mac, Linux, Google Fuchsia OS and the web.
 
 ## Why Flutter?
-Duration: 5
+Duration: 2
 
 There are three ways to develop applications for mobile:
 - native means that we use the native, official tools such as Android Studio with Java and Kotlin for Android or Xcode with Swift and Objective-C for iOS. Even though we can build fast and reliable apps with these tools, the disadvantage is that we need to write the application for each platform.
@@ -38,7 +38,7 @@ Duration: 1
 Flutter applications are written in Dart which is a programming language developed by Google. Dart is an object-oriented language that supports both ahead-of-time and just-in-time compilation. The Dart language offers many of the features seen in other languages including garbage collection, async-await, strong typing, generics, as well as a rich standard library.
 
 ## Part 2: Create a Hello World project in Flutter.
-Duration: 10
+Duration: 5
 
 Follow the instructions from [here](https://flutter.dev/docs/get-started/test-drive?tab=androidstudio#androidstudio) in order to create a new application, which will be named hello_flutter.
 
@@ -68,7 +68,7 @@ void main() { // #2
 6. The Text widget requires that a text direction is specified.
 
 ## Enhance the design of the Flutter App.
-Duration: 10
+Duration: 7
 
 In order to enhance the design of the application, we can use a MaterialApp widget to wrap the other widgets. The MaterialApp widget is an application that uses material design and wraps a number of widgets that are commonly required for material design applications. The MaterialApp allows us to customize our application with its properties.
 
@@ -220,7 +220,7 @@ class HelloFlutterApp extends StatelessWidget {
 3. Replace the code from the body property with the class.
 
 ## Adding logic to a Flutter application.
-Duration: 10
+Duration: 7
 
 Since Widgets are instances of a class, we can add our own methods to a class to perform the business logic.
 
@@ -277,7 +277,7 @@ class Home extends StatelessWidget {
 2. We want the minutes to be shown in two digits.
 
 ## Part 3: The Basic Widgets of Flutter
-Duration: 2
+Duration: 1
 
 Flutter provides a set of basic Widgets that can be used along with Scaffold and AppBar in order to develop applications. This basic Widgets include:
 - Container
@@ -289,7 +289,7 @@ Flutter provides a set of basic Widgets that can be used along with Scaffold and
 - Box Constraints
 
 ## Container
-Duration: 7
+Duration: 5
 
 Container is a widget class that allows you to customize its child widget through its properties. It can be seen as the equivalent of the div class from html. The Container widget allows us to specify properties such as:
 - alignment = aligns the child widget within the container.
@@ -320,7 +320,7 @@ More details about the Container widget can be found [here](https://api.flutter.
 More details about box constraints can be found [here](https://flutter.dev/docs/development/ui/layout/box-constraints) .
 
 ## Text
-Duration: 7
+Duration: 5
 
 The Text widget displays a string of text with a single style. The string can be single line or multiline. The Text widget provides properties such as:
 - data = the string of text to be displayed.
@@ -367,7 +367,7 @@ If we want to use a custom font, we have to:
 More details about the Text widget can be found [here](https://api.flutter.dev/flutter/widgets/Text-class.html) .
 
 ## Row and Column
-Duration: 5
+Duration: 3
 
 The Row and Column widgets allow us to better group the widgets in an application. The Row widget is a list of child widgets placed horizontally, while the Column widget is a list of child widgets placed vertically. Since these widgets contain an array of widgets, they have a children property instead of a child property.
 
@@ -405,7 +405,7 @@ More details about the Row widget can be found [here](https://api.flutter.dev/fl
 More details about the Column widget can be found [here](https://api.flutter.dev/flutter/widgets/Column-class.html) .
 
 ## Image
-Duration: 5
+Duration: 3
 
 The Image widget is used to display an image. 
 The image can come from the following sources:
@@ -434,7 +434,7 @@ Image image = Image(image: imageAsset, width: 400.0, height: 400.0);
 More details about the Image widget can be found [here](https://api.flutter.dev/flutter/widgets/Image-class.html) .
 
 ## RaisedButton and AlertDialog
-Duration: 5
+Duration: 3
 
 A raised button is based on a Material widget whose Material.elevation increases when the button is pressed. RaisedButton adds dimension to otherwise mostly flat layouts, such as a long lists of content or wide empty spaces.
 
@@ -470,7 +470,7 @@ More details about the RaisedButton widget can be found [here](https://api.flutt
 
 More details about the AlertDialog widget can be found [here](https://api.flutter.dev/flutter/material/AlertDialog-class.html) .
 
-## Practical application for Part 3
+## Practical application for Part 3: University Courses app
 Duration: 15
 
 Now we will develop a small application to put in practice all the widgets presented during this part. The application will have one screen which shows some university courses along with their teachers, an image and a raised button to accept the courses presented on the screen.
@@ -639,4 +639,324 @@ The final application should look like this:
 ![flutter app](assets/flutter-tutorial-codelab/flutter_app_part3-1.png)
 ![flutter app](assets/flutter-tutorial-codelab/flutter_app_part3-2.png)
 
+## Part 4: Interactivity in Flutter
+Duration: 5
+
+So far, the applications that we developed showed only static content using non-interactive and stateless widgets. However, more advanced applications should allow the user to input data and react to this input. For an application to be able to handle user input, it needs to maintain state. State represents the information that can be read synchronously when the widget is built (initialisation stage) and might change during the lifetime of the widget. 
+
+In Flutter, it is not the widget that changes, but the State associated with it. Classes that inherit StatefulWidget are immutable, while the State class is mutable.
+
+### Differences between StatelessWidget and StatefulWidget
+|||
+| ----------------------------------------------------------  | ------------------------------------------------------    |
+|                       **StatelessWidget**                   |                     **StatefulWidget**                    |
+|               Does not require a mutable state #1           |                    Has mutable state                      | 
+|                 Overrides the build() method #2             | Overrides the createState() method and returns a State    | 
+| Use when the UI depends on information in the object itself |         Use when the UI can change dynamically            |
+
+1. In other words, a StatelessWidget cannot change its state during the runtime of the application, meaning that the widget cannot be redrawn while the app is running. On the other hand, a StatefulWidget can change its state multiple times within its lifetime and can be redrawn on to the screen any number of times while the app is running.
+
+2. Extending StatelessWidget requires overriding the build() method where you define the UI of the application. However, when you extend a StatefulWidget you need to override the createState() method which returns the state. This means that the UI is not defined in the widget, but in the state. The state class is the one that implements the build method by extending the State class.
+
+## How to use a StatefulWidget
+Duration: 3
+
+1. Create a class that extends the StatefulWidget class and implements the createState method which returns a state class.
+2. Create the state class which contains the properties that will change during the lifetime of the widget. The state class extends the State<T> class, where T is the name of the widget class that extends StatefulWidget. Usually the name of the state class should start with _ in order to emphasize that it is private and should respect the template <name of the stateful widget> + "State".
+3. Since the state class extends State, it must implement the build method which returns a Widget. This build method is the same as the one implemented by a stateless widget.
+4. To make changes call the setState() method. Changes are usually made through events, which are treated as normal properties of a Widget. The event triggers every time the content of the widget changes.
+
+```dart
+class ClassWithState extends StatefulWidget { #1
+    @override
+    State<StatefulWidget> createState() => _ClassWithStateState(); #1
+}
+
+class _ClassWithStateState extends State<ClassWithState> { #2
+    String state = "";
+    
+    @override
+    Widget build(BuildContext context) { #3
+        ...
+        eventProperty: (String value) {
+            setState(() {state = value;}); #4
+        }
+        ... 
+    }
+}
+```
+
+Examples of events include:
+- onChanged which changes the widget as soon as a change is made;
+- onSubmitted which sets the state only after the Enter button on the keyboard is pressed;
+
+## DropdownButton and DropdownMenuItem
+Duration: 5
+
+DropdownButton is a material design button that lets the user select from a number of items. The button shows the currently selected item as well as an arrow that opens a menu for selecting another item.
+
+DropdownButton is a generic class which means that a type T needs to be specified when using it. The type T is the type of the value that each dropdown item represents. All the entries in the dropdown menu have to be of the same type. The items in a dropdown menu are instances of DropdownMenuItem class.
+
+The onChanged callback should update a state variable that defines the dropdown's value. It should also call State.setState to rebuild the dropdown with the new value.
+
+A dropdown button should look like this:
+```dart
+DropdownButton<T>(
+    items: <T>[item_1, item_2, ..., item_n].map((T value) { // #1
+        return DropdownMenuItem<T>(
+            value: value,
+            child: <child widget>,
+        );
+    }).toList(), // #2
+    value: <value of type T>, // #3
+    onChanged: (T value) {
+        setState(() {state = value;});
+    },
+)
+```
+
+1. The items property is an array with the possible values to choose from in the dropdown. Map is a method that iterates though all the values from the array and perform a function on each of them.
+2. toList collects all the elements that are returned by map into a list.
+3. The value property is the current selected value from the dropdown menu.
+
+More details about the DropdownButton widget can be found [here](https://api.flutter.dev/flutter/material/DropdownButton-class.html) .
+
+More details about the DropdownMenuItem widget can be found [here](https://api.flutter.dev/flutter/material/DropdownMenuItem-class.html) .
+
+## Practical application for Part 4: Temperature Converter
+Duration: 15
+
+To practice with StatefulWidgets and DropdownButtons, we will build a Temperature Converter application.
+
+We begin with the main method and the MyApp class:
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Temperature converter',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: TemperatureConverter(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+```
+
+Next, we write the TemperatureConverter class which extends a StatefulWidget:
+
+```dart
+class TemperatureConverter extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _TemperatureConverterState();
+}
+```
+
+Then, we write the state class where the UI is actually implemented.
+
+The state of a widget is represented by the properties of the class that are mutable.
+
+```dart
+class _TemperatureConverterState extends State<TemperatureConverter> {
+  final double _padding = 5.0;
+  final _temperatureScales = ['Celsius', 'Fahrenheit', 'Kelvin'];
+  TextEditingController sourceTemperatureController = TextEditingController();
+  String result = '';
+  String currentSourceScale = 'Celsius';
+  String currentTargetScale = 'Fahrenheit';
+```
+
+Since _TemperatureConverterState extends State, it must implement the build method that returns the Widget representing the UI.
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    TextStyle textStyle = Theme.of(context).textTheme.headline6; // #1
+
+    return Scaffold( // #2
+      appBar: AppBar( // #3
+        title: Text("Temperature Converter App"),
+        backgroundColor: Colors.teal,
+      ),
+```
+
+1. If we do not want to import a custom font for our textStyle property, then we can extract the textStyle from the theme of the context. The TextTheme class contains the definition of several text styles found in Material design. More details can be found [here](https://api.flutter.dev/flutter/material/TextTheme-class.html).
+2. Scaffold is a widget that implements the layout of the application. It provides APIs for showing drawers, snack bars, and bottom sheets. More details can be found [here](https://api.flutter.dev/flutter/material/Scaffold-class.html).
+3. The AppBar widget consists of a toolbar and potentially other widgets, usually placed at the top of the application. App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen. More information can be found [here](https://api.flutter.dev/flutter/material/AppBar-class.html).
+
+The body property of the Scaffold contains the primary content of the scaffold:
+
+```dart
+      body: Container(
+        padding: EdgeInsets.all(15.0),
+        child: Column(children: <Widget>[
+            Padding( // #1
+              padding: EdgeInsets.only(top: _padding, bottom: _padding),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField( #2
+                      controller: sourceTemperatureController, // #3
+                      decoration: InputDecoration( // #4
+                          hintText: "e.g. 30", // #5
+                          labelText: "Source Temperature", // #6
+                          labelStyle: textStyle, // #7
+                          border: OutlineInputBorder( // #8
+                              borderRadius: BorderRadius.circular(5.0))),
+                      keyboardType: TextInputType.number, // #9
+                    ),
+                  ),
+                  DropdownButton<String>(
+                    items: _temperatureScales
+                        .map((String value) => DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            ))
+                        .toList(),
+                    value: currentSourceScale,
+                    onChanged: (String value) {
+                      setState(() {
+                        this.currentSourceScale = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+```
+
+1. The Padding widget insets its child by the given padding. More details can be found [here](https://api.flutter.dev/flutter/widgets/Padding-class.html).
+2. The TextField widget lets the user enter text, either with hardware keyboard or with an onscreen keyboard. More details can be found [here](https://api.flutter.dev/flutter/material/TextField-class.html).
+3. The TextEditingController class is a controller for an editable text field. Whenever the user modifies a text field with an associated TextEditingController, the text field updates value and the controller notifies its listeners. More details can be found [here](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html). This class is a shortcut to creating a variable and updating it with the onChanged event.
+4. InputDecoration is the decoration to show around the text field. More details can be found [here](https://api.flutter.dev/flutter/material/InputDecoration-class.html).
+5. The hintText property suggests what sort of input the field accepts.
+6. The labelText property describes the input field.
+7. The labelStyle property is the style to use for the labelText when the label is above the input field.
+8. The border property specifies the shape of the border to draw around the decoration's container.
+9. Since the text field can only contain numbers (it is a temperature), we can use the property keyboardType to specify the type of keyboard to use for editing the text, in this case a keyboard with only numbers.
+
+These widgets define the rest of the layout:
+
+```dart
+            Padding(
+              padding: EdgeInsets.only(top: _padding, bottom: _padding),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "Target temperature is " + result + " degrees",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16.0),
+                    ),
+                  ),
+                  DropdownButton<String>(
+                    items: _temperatureScales
+                        .map((String value) => DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            ))
+                        .toList(),
+                    value: this.currentTargetScale,
+                    onChanged: (String value) {
+                      setState(() {
+                        this.currentTargetScale = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: _padding, bottom: _padding),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: RaisedButton(
+                      color: Theme.of(context).primaryColorDark,
+                      textColor: Theme.of(context).primaryColorLight,
+                      onPressed: () {
+                        setState(() {
+                          result = _convert();
+                        });
+                      },
+                      child: Text(
+                        'Convert',
+                        textScaleFactor: 1.5,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: RaisedButton(
+                    color: Theme.of(context).buttonColor,
+                    textColor: Theme.of(context).primaryColorDark,
+                    onPressed: () {
+                      setState(() {
+                        _reset();
+                      });
+                    },
+                    child: Text(
+                      'Reset',
+                      textScaleFactor: 1.5,
+                    ),
+                  )),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+```
+
+This methods implement the logic for converting a temperature and reseting the form by deleting the contents of the fields.
+```dart
+  String _convert() {
+    double sourceTemperature = double.parse(sourceTemperatureController.text);
+    double targetTemperature;
+    if (currentSourceScale == "Celsius") {
+      if (currentTargetScale == "Fahrenheit") {
+        setState(() { targetTemperature = sourceTemperature * 1.8 + 32; });
+      } else if (currentTargetScale == "Kelvin") {
+        setState(() { targetTemperature = sourceTemperature + 273.15; });
+      } else { setState(() { targetTemperature = sourceTemperature; }); }
+    }
+
+    if (currentSourceScale == "Fahrenheit") { 
+      if (currentTargetScale == "Celsius") {
+        setState(() { targetTemperature = (sourceTemperature - 32) / 1.8; });
+      } else if (currentTargetScale == "Kelvin") {
+        setState(() { targetTemperature = (sourceTemperature + 459.67) * 5 / 9; });
+      } else { setState(() { targetTemperature = sourceTemperature; }); }
+    }
+
+    if (currentSourceScale == "Kelvin") {
+      if (currentTargetScale == "Celsius") {
+        setState(() { targetTemperature = sourceTemperature - 273.15; });
+      } else if (currentTargetScale == "Fahrenheit") {
+        setState(() { targetTemperature = sourceTemperature * 9 / 5 - 459.67; });
+      } else { setState(() { targetTemperature = sourceTemperature; }); }
+    }
+
+    result = targetTemperature.toStringAsFixed(2);
+    return result;
+  }
+
+  void _reset() {
+    sourceTemperatureController.text = "";
+    setState(() { result = ""; });
+  }
+}
+```
+
+The final application should look like this:
+
+![flutter app](assets/flutter-tutorial-codelab/temperature_converter_app_part4.png)
+
+You can test that the application works properly by using this [online temperature converter](https://www.rapidtables.com/convert/temperature/index.html).
 
