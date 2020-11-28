@@ -228,7 +228,7 @@ class HelloFlutterApp extends StatelessWidget {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Adding logic to a Flutter application." duration="7">
+      <google-codelab-step label="Adding logic to a Flutter application." duration="5">
         <p>Since Widgets are instances of a class, we can add our own methods to a class to perform the business logic.</p>
 <p>For our application, we want to customize the text shown in the Home screen. For this, we create a new method in the Home class called sayHello which returns a String.</p>
 <p>Dart is a strongly typed language meaning that if we declare a variable of type String (String hello; for instance) then we cannot change its type later in the code. However, if we declare hello using var (var hello;) then hello can hold any type. It is recommended to specify the specific type for a variable and not use var. Numbers can be of type int, double and num (num can be either an int or a double).</p>
@@ -615,6 +615,7 @@ class Home extends StatelessWidget {
 </code></pre>
 <p>The final application should look like this:</p>
 <p class="image-container"><img alt="flutter app" src="img/63ad6f5d5c0c6f7b.png"><img alt="flutter app" src="img/8f397d9c5a60be14.png"></p>
+<p>The code for this application can be found <a href="https://github.com/Robert-Marius-Draghici/android-apps/tree/main/flutter/course_management" target="_blank">here</a>.</p>
 
 
       </google-codelab-step>
@@ -756,9 +757,9 @@ class MyApp extends StatelessWidget {
       ),
 </code></pre>
 <ol type="1">
-<li>If we do not want to import a custom font for our textStyle property, then we can extract the textStyle from the theme of the context. The TextTheme class contains the definition of several text styles found in Material design. More details can be found <a href="https://api.flutter.dev/flutter/material/TextTheme-class.html" target="_blank">here</a>.</li>
-<li>Scaffold is a widget that implements the layout of the application. It provides APIs for showing drawers, snack bars, and bottom sheets. More details can be found <a href="https://api.flutter.dev/flutter/material/Scaffold-class.html" target="_blank">here</a>.</li>
-<li>The AppBar widget consists of a toolbar and potentially other widgets, usually placed at the top of the application. App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen. More information can be found <a href="https://api.flutter.dev/flutter/material/AppBar-class.html" target="_blank">here</a>.</li>
+<li>If we do not want to import a custom font for our textStyle property, then we can extract the textStyle from the theme of the context. The <a href="https://api.flutter.dev/flutter/material/TextTheme-class.html" target="_blank">TextTheme class</a> contains the definition of several text styles found in Material design.</li>
+<li><a href="https://api.flutter.dev/flutter/material/Scaffold-class.html" target="_blank">Scaffold</a> is a widget that implements the layout of the application. It provides APIs for showing drawers, snack bars, and bottom sheets.</li>
+<li>The <a href="https://api.flutter.dev/flutter/material/AppBar-class.html" target="_blank">AppBar</a> widget consists of a toolbar and potentially other widgets, usually placed at the top of the application. App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen.</li>
 </ol>
 <p>The body property of the Scaffold contains the primary content of the scaffold:</p>
 <pre><code>      body: Container(
@@ -799,10 +800,10 @@ class MyApp extends StatelessWidget {
             ),
 </code></pre>
 <ol type="1">
-<li>The Padding widget insets its child by the given padding. More details can be found <a href="https://api.flutter.dev/flutter/widgets/Padding-class.html" target="_blank">here</a>.</li>
-<li>The TextField widget lets the user enter text, either with hardware keyboard or with an onscreen keyboard. More details can be found <a href="https://api.flutter.dev/flutter/material/TextField-class.html" target="_blank">here</a>.</li>
-<li>The TextEditingController class is a controller for an editable text field. Whenever the user modifies a text field with an associated TextEditingController, the text field updates value and the controller notifies its listeners. More details can be found <a href="https://api.flutter.dev/flutter/widgets/TextEditingController-class.html" target="_blank">here</a>. This class is a shortcut to creating a variable and updating it with the onChanged event.</li>
-<li>InputDecoration is the decoration to show around the text field. More details can be found <a href="https://api.flutter.dev/flutter/material/InputDecoration-class.html" target="_blank">here</a>.</li>
+<li>The <a href="https://api.flutter.dev/flutter/widgets/Padding-class.html" target="_blank">Padding</a> widget insets its child by the given padding.</li>
+<li>The <a href="https://api.flutter.dev/flutter/material/TextField-class.html" target="_blank">TextField</a> widget lets the user enter text, either with hardware keyboard or with an onscreen keyboard.</li>
+<li>The <a href="https://api.flutter.dev/flutter/widgets/TextEditingController-class.html" target="_blank">TextEditingController class</a> is a controller for an editable text field. Whenever the user modifies a text field with an associated TextEditingController, the text field updates value and the controller notifies its listeners. This class is a shortcut to creating a variable and updating it with the onChanged event.</li>
+<li><a href="https://api.flutter.dev/flutter/material/InputDecoration-class.html" target="_blank">InputDecoration</a> is the decoration to show around the text field.</li>
 <li>The hintText property suggests what sort of input the field accepts.</li>
 <li>The labelText property describes the input field.</li>
 <li>The labelStyle property is the style to use for the labelText when the label is above the input field.</li>
@@ -920,6 +921,7 @@ class MyApp extends StatelessWidget {
 </code></pre>
 <p>The final application should look like this:</p>
 <p class="image-container"><img alt="flutter app" src="img/3db81c6f9b5d27fd.png"></p>
+<p>The code for this application can be found <a href="https://github.com/Robert-Marius-Draghici/android-apps/tree/main/flutter/temperature_converter_app" target="_blank">here</a>.</p>
 <p>You can test that the application works properly by using this <a href="https://www.rapidtables.com/convert/temperature/index.html" target="_blank">online temperature converter</a>.</p>
 
 
@@ -1054,17 +1056,13 @@ class MyApp extends StatelessWidget {
 </code></pre>
 <h2 is-upgraded>Interacting with the database</h2>
 <p>There are two ways to interact with SQLite in Flutter:</p>
-<ol type="1">
-<li>use the SQL language directly:</li>
-</ol>
+<p>1. use the SQL language directly:</p>
 <pre><code>db.rawQuery(&#34;SELECT * FROM myTable&#34;);
 db.rawInsert(&#39;INSERT INTO myTable(title, description) VALUES(&#34;some title&#34;, &#34;some description&#34;)&#39;);
 db,rawUpdate(&#39;UPDATE myTable SET title = ?, WHERE title = ?&#39;, [&#34;new title&#34;, &#34;old title&#34;]);
 db.rawDelete(&#39;DELETE FROM myTable WHERE id = 1&#39;);
 </code></pre>
-<ol type="1">
-<li>use the SQFLite helpers:</li>
-</ol>
+<p>2. use the SQFLite helpers:</p>
 <pre><code>db.update(&#39;myTable&#39;,
           myObject.toMap(), // this is why we defined a toMap method in the model class
           where: &#34;$colId = ?&#34;,
@@ -1208,16 +1206,17 @@ import &#39;package:recipe_app/model/recipe.dart&#39;;
 <p>If we drop the table, we won&#39;t be able to create it again unless:</p>
 <ul>
 <li>we uninstall the application from the device;</li>
-<li>we specify a new version See <a href="https://stackoverflow.com/questions/60125391/flutter-sqlite-exception-no-such-table-sql-logic-error" target="_blank">this post</a> from stackoverflow for more details.</li>
+<li>we specify a new version</li>
 </ul>
+<p>See <a href="https://stackoverflow.com/questions/60125391/flutter-sqlite-exception-no-such-table-sql-logic-error" target="_blank">this post</a> from stackoverflow for more details.</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="The UI: ListView" duration="10">
         <p>Now, it is time to implement the user interface of our recipe application. The first page is going to show a list with all the recipes that we have written so far, with the possibility of adding more. This can easily be implemented using a ListView.</p>
-<p>A ListView is a scrollable list of widgets arranged linearly. It is the most commonly used scrolling widget. It displays its children one after another in the scroll direction. More information about the ListView can be found <a href="https://api.flutter.dev/flutter/widgets/ListView-class.html" target="_blank">here</a> .</p>
-<p>We will also need a button to add a new recipe to the list. To implement this, we will use a FloatingActionButton. A FloatingActionButton is a circular icon button that hovers over content to promote a primary action in the application. This button will stay visible all the time, even when we scroll the items of the listview. More information about the FloatingActionButton can be found <a href="https://api.flutter.dev/flutter/material/FloatingActionButton-class.html" target="_blank">here</a> .</p>
+<p>A <a href="https://api.flutter.dev/flutter/widgets/ListView-class.html" target="_blank">ListView</a> is a scrollable list of widgets arranged linearly. It is the most commonly used scrolling widget. It displays its children one after another in the scroll direction.</p>
+<p>We will also need a button to add a new recipe to the list. To implement this, we will use a <a href="https://api.flutter.dev/flutter/material/FloatingActionButton-class.html" target="_blank">FloatingActionButton</a>. A FloatingActionButton is a circular icon button that hovers over content to promote a primary action in the application. This button will stay visible all the time, even when we scroll the items of the listview.</p>
 <p>We create a new file called recipelist.dart in the screens folder. In this file, we will write the first screen of our application.</p>
 <p>Next, we import the required packages:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
@@ -1270,7 +1269,7 @@ import &#39;package:recipe_app/screens/recipedetail.dart&#39;;
 </code></pre>
 <p>In the getData method, we initialize the database if it wasn&#39;t already, get all the recipes from it, convert them to Recipe objects and add them into a list which represents the input to the ListView widget that will show the recipes on the screen. We also update the count with the length of the result.</p>
 <p>Next, we implement the recipeListItems method which returns a ListView widget to display the recipes on the screen. The ListView is constructed using a builder method with itemCount set to count and itemBuilder set to a function that will be iterated for each item in the list.</p>
-<p>The itemBuilder method takes as parameters the BuildContext and an integer that represents the position in the list. This method returns a Card for each item of the list. A Card is a sheet of material with slightly rounded corners and a shadow. More details can be found <a href="https://api.flutter.dev/flutter/material/Card-class.html" target="_blank">here</a>.</p>
+<p>The itemBuilder method takes as parameters the BuildContext and an integer that represents the position in the list. This method returns a <a href="https://api.flutter.dev/flutter/material/Card-class.html" target="_blank">Card</a> for each item of the list. A Card is a sheet of material with slightly rounded corners and a shadow.</p>
 <pre><code>ListView recipeListItems() {
     return ListView.builder(
         itemCount: count,
@@ -1295,8 +1294,8 @@ import &#39;package:recipe_app/screens/recipedetail.dart&#39;;
   }
 </code></pre>
 <ol type="1">
-<li>The ListTile is a row that contains some text and a leading or trailing icon. <a href="https://api.flutter.dev/flutter/material/ListTile-class.html" target="_blank">More info here</a>.</li>
-<li>We will use as leading icon a CircleAvatar that will show the difficulty of the recipe both with a color and a number. <a href="https://api.flutter.dev/flutter/material/CircleAvatar-class.html" target="_blank">More info here</a>.</li>
+<li>The <a href="https://api.flutter.dev/flutter/material/ListTile-class.html" target="_blank">ListTile</a> is a row that contains some text and a leading or trailing icon.</li>
+<li>We will use as leading icon a <a href="https://api.flutter.dev/flutter/material/CircleAvatar-class.html" target="_blank">CircleAvatar</a> that will show the difficulty of the recipe both with a color and a number.</li>
 <li>onTap method catches the tap event that triggers whenever the user taps on one of the cards. We call the navigateToDetail method to navigate to the second screen which will show details about the recipe we tapped on.</li>
 </ol>
 <p>The getColor method is used to dynamically assign a color depending on the difficulty of the recipe:</p>
@@ -1501,7 +1500,7 @@ const menuBack = &#39;Back to List&#39;;
 </code></pre>
 <ol type="1">
 <li>If the recipe contains data (for example when we click on an already existing recipe), we want to show it in the text field. To accomplish this, we assign to the text field of each controller the values of the corresponding fields from the recipe.</li>
-<li>PopupMenuButton displays a menu when pressed and calls onSelected when the menu is dismissed because an item was selected. The value passed to onSelected is the value of the selected menu item (<a href="https://api.flutter.dev/flutter/material/PopupMenuButton-class.html" target="_blank">More info here</a>).</li>
+<li><a href="https://api.flutter.dev/flutter/material/PopupMenuButton-class.html" target="_blank">PopupMenuButton</a> displays a menu when pressed and calls onSelected when the menu is dismissed because an item was selected. The value passed to onSelected is the value of the selected menu item.</li>
 <li>The onSelected event is triggered when the user selects a menu item.</li>
 <li>Setting maxLines to null allows the text field to grow vertically if the text is bigger than one line.</li>
 </ol>
@@ -1643,6 +1642,209 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
 </code></pre>
 <p>The final application should look like this:</p>
 <p class="image-container"><img alt="flutter app" src="img/4ebf99888aad092c.png"><img alt="flutter app" src="img/ffbe6cdefd29e6bf.png"><img alt="flutter app" src="img/a52f48b355f03c90.png"><img alt="flutter app" src="img/5f78f562bf6d8d1e.png"></p>
+<p>The code for this application can be found <a href="https://github.com/Robert-Marius-Draghici/android-apps/tree/main/flutter/recipe_app" target="_blank">here</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 6: Additional content (gestures, animations) and conclusion" duration="15">
+        <p>This is the last part of the Flutter Codelab tutorial. Here, we will introduce some useful features that a mobile app should have such as gesture detector and animations.</p>
+<p>To show this features we will build a small application in which we will apply several gestures on a rectangle.</p>
+<p>We create a new Flutter project. In the main.dart file, replace the initial code with the following:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Gestures and Animations&#39;,
+      theme: ThemeData(primarySwatch: Colors.teal,),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+
+  @override
+  Widget build(BuildContext context) {}
+}
+</code></pre>
+<h2 is-upgraded>Gestures</h2>
+<p>To demonstrate the use of gestures, we will want our app to show how many times a user has tapped, double tapped and long pressed on a rectangle. To keep track of this variables, we will define them in the _MyHomePageState class:</p>
+<pre><code>class _MyHomePageState extends State&lt;MyHomePage&gt; {
+
+  int numTaps = 0;
+  int numDoubleTaps = 0;
+  int numLongPress = 0;
+</code></pre>
+<p>We also need some variables to keep track of the position of the rectangle, as well as its dimensions:</p>
+<pre><code>  double posX = 0.0;
+  double posY = 0.0;
+  double boxWidth = 150.0;
+  double boxHeight = 75.0;
+</code></pre>
+<p>Next we define the build method. When we start running our application, we want the rectangle to be placed in the center of the screen:</p>
+<pre><code>  @override
+  Widget build(BuildContext context) {
+    
+    if (posX == 0) {
+      center(context);
+    }
+</code></pre>
+<p>The build method will return a Scaffold widget:</p>
+<pre><code>    return Scaffold(
+      appBar: AppBar(title: Text(&#34;Gestures and Animations&#34;)),
+</code></pre>
+<p>In the body of the Scaffold we will define the rectangle with the help of two widgets: <a href="https://api.flutter.dev/flutter/widgets/Stack-class.html" target="_blank">Stack</a> and <a href="https://api.flutter.dev/flutter/widgets/Positioned-class.html" target="_blank">Positioned</a>.</p>
+<p>A Stack is a layout widget that positions its children relative to the edges of its box. This widget is useful when we want to overlay widgets on top of each other and also when we want to decide exactly how to position an element inside another element.</p>
+<p>Inside the Stack, we can use a Positioned widget that controls where a child of a Stack is positioned, using its properties (top, left, right, bottom).</p>
+<p>To detect gestures, we will wrap the Stack widget into a <a href="https://api.flutter.dev/flutter/widgets/GestureDetector-class.html" target="_blank">GestureDetector</a> widget. This widget has properties that respond to the gestures of our users.</p>
+<p>Using the onTap, onDoubleTap and onLongPress properties, we will detect when the user performs this gestures and increment the corresponding counter:</p>
+<pre><code>      body: GestureDetector(
+          onTap: () {
+            setState(() {
+              numTaps++;
+            });
+          },
+          onDoubleTap: () {
+            setState(() {
+              numDoubleTaps++;
+            });
+          },
+          onLongPress: () {
+            setState(() {
+              numLongPress++;
+            });
+          },
+</code></pre>
+<p>We can also use gestures to move our rectangle using the onVerticalDragUpdate and onHorizontalDragUpdate properties. The difference between these properties and the ones used before is that they receive a DragUpdateDetails parameter, which will be useful for updating the position of our rectangle. To update this position, we extract from the DragUpdateDetails parameter the length of the movement performed by the user which can be both positive or negative and we add this length to the current position of the rectangle:</p>
+<pre><code>          onVerticalDragUpdate: (DragUpdateDetails value) {
+            setState(() {
+              double delta = value.delta.dy;
+              posY += delta;
+            });
+          },
+          onHorizontalDragUpdate: (DragUpdateDetails value) {
+            setState(() {
+              double delta = value.delta.dx;
+              posX += delta;
+            });
+          },
+</code></pre>
+<p>All the above gestures are detected only if they are performed on the child widget of the GestureDetector, which in our case is the Stack that defines the rectangle:</p>
+<pre><code>          child: Stack(
+            children: &lt;Widget&gt;[
+              Positioned(
+                  left: posX,
+                  top: posY,
+                  child: Container(
+                    width: boxWidth,
+                    height: boxHeight,
+                    decoration: BoxDecoration(color: Colors.red),
+                  ))
+            ],
+          )),
+</code></pre>
+<p>The bottomNavigationBar property of the Scaffold Widget is used to display a text with the number of gestures detected by the application:</p>
+<pre><code>      bottomNavigationBar: Material(
+        color: Theme.of(context).primaryColorLight,
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Text(&#34;Taps: $numTaps - Double Taps: $numDoubleTaps - Long Presses: $numLongPress&#34;,
+          style: Theme.of(context).textTheme.headline6,)
+        )
+      ),
+    );
+  }
+</code></pre>
+<p>The center method updates the position of our rectangle so that it will be placed in the center of our screen:</p>
+<pre><code>  void center(BuildContext context) {
+    posX = (MediaQuery.of(context).size.width / 2) - boxWidth / 2;
+    posY = (MediaQuery.of(context).size.height / 2) - boxHeight / 2 - 30.0;
+
+    setState(() {
+      posX = posX;
+      posY = posY;
+    });
+  }
+</code></pre>
+<h2 is-upgraded>Animations</h2>
+<p>We also want to add an animation to our rectangle. When the application starts, we want the rectangle to appear slowly on the screen, by increasing its dimensions from 0 to the max size. To create this animation we will use an <a href="https://api.flutter.dev/flutter/animation/AnimationController-class.html" target="_blank">AnimationController</a> and a <a href="https://api.flutter.dev/flutter/animation/CurvedAnimation-class.html" target="_blank">CurvedAnimation</a>.</p>
+<p>The animation controller is an object that generates a new value whenever the device running your app is ready to display a new frame (typically, this rate is around 60 values per second). By default, an AnimationController linearly produces values that range from 0.0 to 1.0, during a given duration. The vsync property makes sure that if an object is not visible, it does not waste system resources to draw it.</p>
+<p>The CurvedAnimation defines the animation&#39;s progress as a non linear curve. For example, easeInOut defines an animation that starts slowly, speeds up and then ends slowly.</p>
+<p>The animation object has an addListener method which is called whenever the value of the animation changes. In this method, we call the setState method to change some properties of the UI.</p>
+<p>The forward method of the controller makes the animation begin.</p>
+<p>To add this animation, we need to use several methods that define the lifecycle of a StatefulWidget in Flutter:</p>
+<ul>
+<li>the initState method is called by the framework when a state is created. This method should be used whenever we want to perform initializations, as it is called only once.</li>
+<li>the build method, which we have used many times until now. Each time we call the setState method, the build is also called.</li>
+<li>the dispose method is called at the end of the lifetime of a widget. It is useful to free resources from the system.</li>
+</ul>
+<p>Now, we define the properties that will control our animation:</p>
+<pre><code>  Animation&lt;double&gt; animation;
+  AnimationController controller;
+</code></pre>
+<p>We also need to set the boxWidth and boxHeight to zero and define two new variables that represent the maximum size of the rectangle:</p>
+<pre><code>  double boxWidth = 0.0;
+  double boxHeight = 0.0;
+  final double fullBoxWidth = 150.0;
+  final double fullBoxHeight = 75.0;
+</code></pre>
+<p>The vsync property of the controller will require an instance of a <a href="https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html" target="_blank">TickerProvider</a> object. To obtain this instance, we will use the <a href="https://api.flutter.dev/flutter/widgets/SingleTickerProviderStateMixin-mixin.html" target="_blank">SingleTickerProviderStateMixin</a> in the definition of the class:</p>
+<pre><code>class _MyHomePageState extends State&lt;MyHomePage&gt; with SingleTickerProviderStateMixin
+</code></pre>
+<p>A mixin is a class whose methods can be used by other classes without inheritance.</p>
+<p>We will write the code for the animation in the initState method:</p>
+<pre><code>  @override
+  void initState() {
+
+    super.initState();
+
+    controller = AnimationController(
+      duration: const Duration(milliseconds: 5000),
+      vsync: this,
+    );
+
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOut,
+    );
+
+    animation.addListener(() {
+      setState(() {
+        boxWidth = fullBoxWidth * animation.value;
+        boxHeight = fullBoxHeight * animation.value;
+      });
+
+      center(context);
+    });
+
+    controller.forward();
+  }
+</code></pre>
+<p>To free the system resources, we have also overriden the dispose method:</p>
+<pre><code>  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+}
+</code></pre>
+<p>The final application should look like this:</p>
+<p class="image-container"><img alt="flutter app" src="img/a82d967c742d84f6.png"><img alt="flutter app" src="img/7dd6d38d32cf778f.png"></p>
+<p>The code for this application can be found <a href="https://github.com/Robert-Marius-Draghici/android-apps/tree/main/flutter/rectangle" target="_blank">here</a>.</p>
+<h2 is-upgraded>Conclusion</h2>
+<p>With this application, the Flutter tutorial has come to an end. Thank you for following this tutorial and I hope it helped you better understand how to build applications in Flutter. If you come across mistakes during the tutorial or if you want to give feedback on how to improve it, feel free to open a pull request <a href="https://github.com/Robert-Marius-Draghici/my-codelabs/pulls" target="_blank">here</a>.</p>
 
 
       </google-codelab-step>
