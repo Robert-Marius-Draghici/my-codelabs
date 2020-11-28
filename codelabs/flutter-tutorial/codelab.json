@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-11-01T22:59:22+02:00",
+  "updated": "2020-10-17T00:38:22+03:00",
   "id": "flutter-tutorial",
-  "duration": 96,
+  "duration": 47,
   "title": "Flutter tutorial",
   "summary": "A step by step tutorial for creating Flutter applications.",
-  "source": "flutter-codelab.md",
+  "source": "flutter-tutorial.md",
   "theme": "",
   "status": [
     "draft"

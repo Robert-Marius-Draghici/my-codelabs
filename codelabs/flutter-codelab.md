@@ -960,3 +960,860 @@ The final application should look like this:
 
 You can test that the application works properly by using this [online temperature converter](https://www.rapidtables.com/convert/temperature/index.html).
 
+## Part 5: Develop a real world application in Flutter.
+Duration: 1
+
+The goal of this part is to develop a real world application in Flutter by combining most of the concepts learned in the previous parts and introducing new concepts such as navigation or database storage.
+
+The application we are going to develop is a recipe application, that allows us to write new recipes or read the existing ones.
+
+To make the application easier to understand and maintain, we will break it into several modules. After creating a new project, we create 3 folders:
+- model - the model classes used by the database
+- screens - the screens of the application
+- util - utility functions
+
+## The Model Class
+Duration: 10
+
+In our application we need to define a model class for the recipe. A model class is typically used to "model" the data in your application by mirroring the data source such as a database or a JSON. The model class holds all properties, constructors and methods.
+
+In the model folder, we create the recipe.dart file where we will define the Recipe model class:
+
+```dart
+class Recipe {
+```
+
+First, we define the properties that describe a recipe such as a title, the ingredients, the steps to follow and the difficulty. The id property is required for the database. Optionally, we can specify a date for the recipe.
+
+The _ from the property names means that the field is private, not accesible from outside the class.
+
+```dart
+  int _id; 
+  String _title;
+  String _ingredients;
+  String _steps;
+  int _difficulty;
+  String _date;  
+```
+
+Then, we need to define a way to instantiate the Recipe objects with constructors. Constructors are a special method that is used to initialize an object when created in the program. They have the same name as the class name and don't have any return type.
+
+In Dart, if we do not define a constructor, the compiler will automatically create the default constructor that doesn't have any parameters in it. However, if we define a constructor, the default constructor will not be created. The syntax for creating a constructor is the following:
+
+```dart
+class_name( [ parameters ] ){
+    // Constructor Body
+}
+```
+
+We want to define two constructors with parameters, one without the id and one with it. We need to make this distinction, because the id is assigned when the recipe is inserted in the database and not when creating the object.
+
+The notation used below for the constructor is a shorthand notation in Dart using the keyword this. In this way, the value you pass in the parameter will be directly linked to the corresponding object property in the constructor. Optional parameters are enclosed in square brackets.
+
+```dart
+    Recipe(this._title, this._ingredients, this._steps, this._difficulty, [this._date]); 
+```
+
+In Dart, we can't define two constructors with the same name even though they have different parameters. To solve this problem, Dart introduced named constructors, which allow the user to make multiple constructors with a different name, using this syntax:
+
+```dart
+class_name.constructor_name ( parameters ){
+   // Body of Constructor
+}
+```
+
+We will name the second constructor withId:
+
+```dart
+  Recipe.withId(this._id, this._title, this._ingredients, this._steps, this._difficulty, [this._date]); 
+```
+
+Next, we will define getters for the properties. If we do not want to make any change to the properties before accessing them, then we can use the fat arrow notation to shorten the method.
+  
+```dart
+  int get id => _id;
+  String get title => _title;
+  String get ingredients => _ingredients;
+  String get steps => _steps;
+  int get difficulty => _difficulty;
+  String get date => _date;
+```
+
+Then, we define the setters for the properties. We do not need a setter for the id, because once it is set by the database we do not want to change it. We can also use the setter to check if the input supplied respects some constraints such as minimum/maximum length. If the values are not what we expect, we can also throw errors from the setter.
+
+```dart
+  set title(String value) {
+    if (value.length <= 100) {
+      _title = value;
+    }
+  }
+
+  set ingredients(String value) {
+    _ingredients = value;
+  }
+
+  set steps(String value) {
+    _steps = value;
+  }
+
+  set difficulty(int value) {
+    _difficulty = value;
+  }
+  
+  set date(String value) {
+    _date = value;
+  }
+```
+
+We will also define some helper methods that convert the recipe object into a Map (a key-value pair collection) and vice versa. The second method will be implemented as another named constructor. These methods will be helpful for interacting with the database.
+
+```dart
+  Map <String, dynamic> toMap() {
+    var map = Map<String, dynamic>();
+    
+    map["title"] = _title;
+    map["ingredients"] = _ingredients;
+    map["steps"] = _steps;
+    map["difficulty"] = _difficulty;
+    map["date"] = _date;
+    
+    if (_id != null) {
+      map["id"] = _id;
+    }
+    
+    return map;
+  }
+
+  Recipe.fromObject(dynamic o) {
+    this._id = o["id"];
+    this._title = o["title"];
+    this._ingredients = o["ingredients"];
+    this._steps = o["steps"];
+    this._difficulty = o["difficulty"];
+    this._date = o["date"];
+  }
+}
+```
+
+## The Database
+Duration: 15
+
+In our application we will make use of SQFLite, which is a Flutter plugin that allows us to use SQLite. According to sqlite.org, SQLite is an in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. To understand this definition better, we will break it into concepts and explain them:
+- self-contained means that SQLite needs very little support from external libraries. This is useful if we want to develop a light-weight, platform independent application.
+- serverless means that SQLite reads and writes directly from the database files on disk. This means that we do not have to setup a client-server connection in order to use it.
+- zero-configuration means that there is no installation or setup required.
+- transactional means that all changes in a transaction occur completely or not at all. If the program crashes in the middle of the transation, no data will be written in the database, making it secure and reliable.
+- also, since it is a SQL database engine, we can use the SQL language to build queries. 
+
+### Installing dependencies
+
+In order to use SQLite in the application, the SQFLite plugin needs to be installed, by specifying it in the pubspec.yaml file. Apart from the sqflite plugin, we will also need to define the following dependencies:
+- path_provider (any) which finds commonly used locations on the filesystem. We use this package to find the database location which is different on Android and iOS devices. Using this package we don't have to worry about the physical path of the OS.
+- intl (^0.15.7) which is an internationalization package used among others for date/number formatting and parsing.
+
+```yaml
+dependencies:
+  sqflite: any
+  path_provider: any
+  intl: ^0.15.7
+```
+
+### Interacting with the database
+There are two ways to interact with SQLite in Flutter:
+1. use the SQL language directly:
+
+```sql
+db.rawQuery("SELECT * FROM myTable");
+db.rawInsert('INSERT INTO myTable(title, description) VALUES("some title", "some description")');
+db,rawUpdate('UPDATE myTable SET title = ?, WHERE title = ?', ["new title", "old title"]);
+db.rawDelete('DELETE FROM myTable WHERE id = 1');
+```
+
+2. use the SQFLite helpers:
+
+```dart
+db.update('myTable',
+          myObject.toMap(), // this is why we defined a toMap method in the model class
+          where: "$colId = ?",
+          whereArgs: [myObject.id]);
+```
+
+Both of these approaches are asynchronous, because accessing the database can take a long time and it would render the application unresponsive if they would be synchronous.
+
+### Asynchronous programming in Flutter
+
+When a Flutter application is started, a single thread (path of exection) is automatically created. This thread is the main thread of the application and is also named the UI thread, because one of its responsibilities is to draw all the widgets on the screen and responding to user input. If we run long operations such as database queries on the main thread, it could render the application unresponsive. To counter this problem, we can delegate such long tasks to other secondary threads to run in parallel, so that the main thread would remain responsive. When the secondary threads finish their tasks, they return their results to the main thread which will react accordingly.
+
+In Flutter, asynchronous programming is implemented using Future, Async and Await.
+
+A Future represents an object that will return a value sometime in the future. If we create a method that returns a Future, when we call it, we will immediately receive a Future object and the method will spawn a secondary thread to do the task. When the tasks are finished, the then method from the main thread is called with the result.
+
+```dart
+Future<List> getRecipes() {
+  // secondary thread
+}  
+
+recipesFuture = getRecipes().then((result) {
+  // main thread
+}
+```
+
+The async and await keywords allow us to write asynchronous code that looks like synchronous one. We use the await keyword for long performing tasks. A method marked as async must return a Future or if it is void, it will return a Future wrapped around a null.
+
+```dart
+void doSomething() async {
+  result = await getRecipes();
+}
+```
+
+### Implement the database helper class
+Next we will create a file called dbhelper.dart in the util folder.
+
+We begin by importing the required packages:
+
+```dart
+import 'package:sqflite/sqflite.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:recipe_app/model/recipe.dart';
+```
+
+Then, we define the class and define some constants that will help with the queries:
+
+```dart
+class DbHelper {
+  String tblRecipe = "recipe";
+  String colId = "id";
+  String colTitle = "title";
+  String colIngredients= "ingredients";
+  String colSteps = "steps";
+  String colDifficulty = "difficulty";
+  String colDate = "date";
+```
+
+Since the DbHelper class will be used to retrieve the database and make reads and writes over it, a single instance for the entire application will be enough. Then, it would be useful to restrict its instantiation to one object only using the Singleton pattern. To implement the Singleton pattern in Dart we need to:
+
+1. create a private instance of the class using a named private constructor;
+2. create the empty private named constructor;
+3. use the factory constructor which is public to always return the same instance. The factory constructor is a Dart feature that allows us to override the default behaviour when we instantiate an object. Instead of always creating a new instance, we instruct the factory constructor to always return the same instance, the private instance.
+  
+Now we will add the Singleton pattern implementation to the DbHelper class:
+
+```dart
+  static final DbHelper _dbhelper = DbHelper._internal(); // #1
+  
+  DbHelper._internal(); // #2
+
+  factory DbHelper() { // #3
+    return _dbhelper;
+  }
+```
+
+Next, we will implement a method to initialize the database:
+
+```dart
+  Future<Database> initializeDb() async { // #1
+    Directory dir = await getApplicationDocumentsDirectory(); // #2
+    String path = dir.path + "recipes.db";
+    var dbRecipes = await openDatabase(path, version: 1, onCreate: _createDb); // #3
+    return dbRecipes;
+  }
+```
+
+1. async and await are from the async package.
+2. Directory is from the io package. getApplicationDocumentsDirectory is from the path_provider package and returns the directory for the documents of our app, which is different depending on the OS.
+3. If the database does not exist, it will create it by calling the _createDb function defined below:
+
+```dart
+  void _createDb(Database db, int newVersion) async {
+    await db.execute(
+        "CREATE TABLE $tblRecipe($colId INTEGER PRIMARY KEY, $colTitle TEXT, "
+            "$colIngredients TEXT, $colSteps TEXT, $colDifficulty INTEGER, $colDate TEXT)");
+  }
+```
+
+To drop the table from the database, we defined the following method:
+
+```dart
+void dropDb() async {
+    await _db.execute("DROP TABLE $tblRecipe");
+  }
+```
+
+We also need to create the variable that will hold the database throughout the class along with a getter that initializes the database if it does not exist:
+
+```dart
+  static Database _db;
+
+  Future<Database> get db async {
+    if (_db == null) {
+      _db = await initializeDb();
+    }
+    return _db;
+  }
+```
+
+Finally, we will create the query methods:
+
+```dart
+  Future<int> insertRecipe(Recipe recipe) async { // #1
+    Database db = await this.db;
+    var result = await db.insert(tblRecipe, recipe.toMap());
+    return result;
+  }
+  
+  Future<List> getRecipes() async {
+    Database db = await this.db;
+    var result = await db.rawQuery("SELECT * FROM $tblRecipe");
+    return result;
+  }
+  
+  Future<int> getCount() async {
+    Database db = await this.db;
+    var result = Sqflite.firstIntValue(
+      await db.rawQuery("SELECT COUNT (*) FROM $tblRecipe")
+    );
+    return result;
+  }
+  
+  Future<int> updateRecipe(Recipe recipe) async {
+    var db = await this.db;
+    var result = await db.update(tblRecipe, recipe.toMap(),
+      where: "$colId = ?", whereArgs: [recipe.id]);
+    return result;
+  }
+  
+  Future<int> deleteRecipe(int id) async {
+    int result;
+    var db = await this.db;
+    result = await db.rawDelete("DELETE FROM $tblRecipe WHERE $colId = $id");
+    return result;
+  }
+}
+```
+
+1. The insert method should return the id of the record inserted in the database. If it is 0, then something went wrong.
+
+Until we will define the UI of the application, we can test that the database implementation is working by writing this code in the build method of class MyApp from main.dart file and running or debugging it:
+
+```dart
+    DbHelper helper = DbHelper();
+    helper.initializeDb().then((value) => helper.getRecipes().then((value) => print(value)));
+    DateTime today = DateTime.now();
+    Recipe recipe = Recipe("Apple pie", "apples", "1. Cut apples. 2. Bake apple pie",  today.toString());
+    helper.insertRecipe(recipe);
+    helper.getRecipes().then((value) => print(value));
+    helper.deleteRecipe(1);
+    helper.getRecipes().then((value) => print(value));
+```
+
+If we drop the table, we won't be able to create it again unless:
+- we uninstall the application from the device;
+- we specify a new version
+See [this post](https://stackoverflow.com/questions/60125391/flutter-sqlite-exception-no-such-table-sql-logic-error) from stackoverflow for more details.
+
+## The UI: ListView
+Duration: 10
+
+Now, it is time to implement the user interface of our recipe application. The first page is going to show a list with all the recipes that we have written so far, with the possibility of adding more. This can easily be implemented using a ListView.
+
+A ListView is a scrollable list of widgets arranged linearly. It is the most commonly used scrolling widget. It displays its children one after another in the scroll direction. More information about the ListView can be found [here](https://api.flutter.dev/flutter/widgets/ListView-class.html) .
+
+We will also need a button to add a new recipe to the list. To implement this, we will use a FloatingActionButton. A FloatingActionButton is a circular icon button that hovers over content to promote a primary action in the application. This button will stay visible all the time, even when we scroll the items of the listview. More information about the FloatingActionButton can be found [here](https://api.flutter.dev/flutter/material/FloatingActionButton-class.html) .
+
+We create a new file called recipelist.dart in the screens folder. In this file, we will write the first screen of our application.
+
+Next, we import the required packages:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:recipe_app/model/recipe.dart';
+import 'package:recipe_app/util/dbhelper.dart';
+import 'package:recipe_app/screens/recipedetail.dart';
+```
+
+We create the RecipeList class which extends a StatefulWidget and override the createState method:
+
+```dart
+class RecipeList extends StatefulWidget {
+  
+  @override
+  State<StatefulWidget> createState() => RecipeListState();
+}
+```
+
+We also need the state class:
+
+```dart
+class RecipeListState extends State {
+
+  @override
+  Widget build(BuildContext context) {} 
+}
+```
+
+In order to show the data to the screen, we first need to get it from the database. For this, we will use some private properties to maintain the state and methods to retrieve this data:
+
+```dart
+class RecipeListState extends State {
+
+  DbHelper dbHelper = DbHelper();
+  List<Recipe> recipes;
+  int count = 0;
+
+  void getData() {
+    final dbFuture = dbHelper.initializeDb();
+    dbFuture.then((result) {
+      final recipesFuture = dbHelper.getRecipes();
+      recipesFuture.then((result) {
+        List<Recipe> recipeList = List<Recipe>();
+        count = result.length;
+
+        for (int i = 0; i < count; i++) {
+          recipeList.add(Recipe.fromObject(result[i]));
+          debugPrint(recipeList[i].title);
+        }
+
+        setState(() {
+          recipes = recipeList;
+          count = count;
+        });
+        debugPrint("Items " + count.toString());
+      });
+    });
+  }
+```
+
+In the getData method, we initialize the database if it wasn't already, get all the recipes from it, convert them to Recipe objects and add them into a list which represents the input to the ListView widget that will show the recipes on the screen. We also update the count with the length of the result. 
+
+Next, we implement the recipeListItems method which returns a ListView widget to display the recipes on the screen. The ListView is constructed using a builder method with itemCount set to count and itemBuilder set to a function that will be iterated for each item in the list. 
+
+The itemBuilder method takes as parameters the BuildContext and an integer that represents the position in the list. This method returns a Card for each item of the list. A Card is a sheet of material with slightly rounded corners and a shadow. More details can be found [here](https://api.flutter.dev/flutter/material/Card-class.html).
+
+```dart
+ListView recipeListItems() {
+    return ListView.builder(
+        itemCount: count,
+        itemBuilder: (BuildContext context, int position) {
+          return Card(
+            color: Colors.white,
+            elevation: 2.0,
+            child: ListTile( // #1
+              leading: CircleAvatar( // #2
+                backgroundColor: getColor(this.recipes[position].difficulty),
+                child: Text(this.recipes[position].difficulty.toString())
+              ),
+              title: Text(this.recipes[position].title),
+              subtitle: Text(this.recipes[position].date),
+              onTap: () { // #3
+                debugPrint("Tapped on " + this.recipes[position].id.toString());
+                navigateToDetail(this.recipes[position]);
+              },
+            ),
+          );
+        });
+  }
+```
+
+1. The ListTile is a row that contains some text and a leading or trailing icon. [More info here](https://api.flutter.dev/flutter/material/ListTile-class.html).
+2. We will use as leading icon a CircleAvatar that will show the difficulty of the recipe both with a color and a number. [More info here](https://api.flutter.dev/flutter/material/CircleAvatar-class.html).
+3. onTap method catches the tap event that triggers whenever the user taps on one of the cards. We call the navigateToDetail method to navigate to the second screen which will show details about the recipe we tapped on.
+
+The getColor method is used to dynamically assign a color depending on the difficulty of the recipe:
+
+```dart
+Color getColor(int difficulty) {
+    switch(difficulty) {
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.yellow;
+      case 3:
+        return Colors.red;
+      default:
+        return Colors.yellow;
+    }
+  }
+```
+
+In the build method, if the recipes object is null (this happens when the screen is loaded the first time), we instantiate it as a new list of recipes and call the getData() method to retrieve the recipes from the database and fill the list with them.
+
+The build method will return a Scaffold widget, with the ListView defined by recipeListItems as body and a floatingActionButton to add more recipes. By pressing the floatingActionButton, we will navigate to the second screen of the app where we add the new recipe. This screen is also used to see the details of an already added recipe.
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    if (recipes == null) {
+      recipes = List<Recipe>();
+      getData();
+    }
+
+    return Scaffold(
+      body: recipeListItems(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigateToDetail(Recipe('', '', '', 1));
+        },
+        tooltip: "Add new recipe",
+        child: new Icon(Icons.add),
+      ),
+    );
+  }
+```
+
+### Navigation in Flutter
+
+From this screen we will want to navigate to the second screen of the app to view, add or delete a recipe. In Flutter, navigation is based on a stack which contains the screens or pages that an app has used from the beginning. In order to change the page, an object named Navigator is used which has two methods that deal with the stack:
+- the push method which puts a new page at the top of the stack. In order to use the push method, we need to specify the route, which is the page we want to load. Flutter has a MaterialPageRoute class that lets us choose the name of the page we want to push.
+- the pop method removes the page from the screen so that the previous page from the stack becomes visible again.
+
+Both push and pop methods require the context to work.
+
+We can get to the second screen either by tapping on a Card or by pressing on the floating action button. Since both ways have the same steps, we will implement a method navigateToDetail to handle the navigation:
+
+```dart
+  void navigateToDetail(Recipe recipe) async {
+    bool result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => RecipeDetail(recipe)));
+
+    if (result) {
+      getData();
+    }
+  }
+}
+```
+
+## The UI: The Detail View
+Duration: 10
+
+The next step in defining the UI is to create the second screen that will show the details of a recipe. In this screen, the user will have the possibility to view, add or delete a recipe. We can get to this screen in two ways:
+- by pressing the floating action button on the first screen in order to create a new recipe.
+- by clicking on one of the items in the recipe list.
+
+As the name suggests, this screen will need a recipe when instantiated. For this, we will require the constructor to have a Recipe parameter.
+
+We create a new file called recipedetail.dart in the screens folder. 
+As usual, we will import the required packages:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:recipe_app/model/recipe.dart';
+import 'package:recipe_app/util/dbhelper.dart';
+import 'package:intl/intl.dart'; // #1
+```
+
+1. The intl package is the internationalization package that will allow us to write the date of our recipe in the format we choose.
+
+The next step is to define some constants for the commands that we will use on a recipe. We will also define an instance of the DbHelper class:
+
+```dart
+DbHelper dbHelper = DbHelper();
+final List<String> commands = const <String> [
+  'Save Recipe & Back',
+  'Delete Recipe',
+  'Back to List'
+];
+
+const menuSave = 'Save Recipe & Back';
+const menuDelete = 'Delete Recipe';
+const menuBack = 'Back to List';
+```
+
+Then we define the RecipeDetail class which extends a StatefulWidget:
+
+```dart
+class RecipeDetail extends StatefulWidget {
+```
+
+This class will have a Recipe property named recipe:
+
+```dart
+  final Recipe recipe;
+```
+
+In the constructor, we will have a Recipe parameter:
+
+```dart
+  RecipeDetail(this.recipe);
+```
+
+Then, we override the createState method of the StatefulWidget and return the State class:
+
+```dart
+  @override
+  State<StatefulWidget> createState() => RecipeDetailState(recipe);
+}
+```
+
+Next, we define the RecipeDetailState class and its properties:
+
+```dart
+class RecipeDetailState extends State {
+  Recipe recipe;
+  RecipeDetailState(this.recipe);
+
+  final _difficulties = ["Simple", "Average", "Hard"]; // #1
+  String _difficulty = "Average"; // #2
+
+  TextEditingController titleController = TextEditingController(); // #3
+  TextEditingController ingredientsController = TextEditingController();
+  TextEditingController stepsController = TextEditingController();
+```
+
+1. This property defines the possible values for the difficulty of a recipe.
+2. This is the default value for the recipe.
+3. We create a TextEditingController for each String property of the recipe model apart from the date.
+
+Then we implement the build method:
+
+```dart
+@override
+  Widget build(BuildContext context) {
+    titleController.text = recipe.title; // #1
+    ingredientsController.text = recipe.ingredients;
+    stepsController.text = recipe.steps;
+
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+    
+    return Scaffold(
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(recipe.title),
+            actions: <Widget>[
+              PopupMenuButton<String>( // #2
+                onSelected: (value) => select(value), // #3
+                itemBuilder: (BuildContext context) {
+                  return commands.map((String command) {
+                    return PopupMenuItem<String>(
+                      value: command,
+                      child: Text(command),
+                    );
+                  }).toList();
+                },
+              ),
+            ]),
+        body: Padding(
+            padding: EdgeInsets.only(top: 35.0, left: 10.0, right: 10.0),
+            child: ListView(children: <Widget>[
+              Column(
+                children: <Widget>[
+                  TextField(
+                    controller: titleController,
+                    style: textStyle,
+                    onChanged: (value) => this.updateTitle(),
+                    decoration: InputDecoration(
+                        labelText: "Title",
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      child: TextField(
+                        controller: ingredientsController,
+                        style: textStyle,
+                        maxLines: null, // #4
+                        onChanged: (value) => this.updateIngredients(),
+                        decoration: InputDecoration(
+                            labelText: "Ingredients",
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 15.0),
+                      child: TextField(
+                        controller: stepsController,
+                        style: textStyle,
+                        maxLines: null,
+                        onChanged: (value) => this.updateSteps(),
+                        decoration: InputDecoration(
+                            labelText: "Steps",
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                      )),
+                  ListTile(
+                      title: DropdownButton<String>(
+                        items: _difficulties.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        style: textStyle,
+                        value: retrieveDifficulty(recipe.difficulty),
+                        onChanged: (value) => convertDifficulty(value),
+                    ))
+                ],
+              )
+            ])));
+  }
+```
+
+1. If the recipe contains data (for example when we click on an already existing recipe), we want to show it in the text field. To accomplish this, we assign to the text field of each controller the values of the corresponding fields from the recipe.
+2. PopupMenuButton displays a menu when pressed and calls onSelected when the menu is dismissed because an item was selected. The value passed to onSelected is the value of the selected menu item ([More info here](https://api.flutter.dev/flutter/material/PopupMenuButton-class.html)).
+3. The onSelected event is triggered when the user selects a menu item.
+4. Setting maxLines to null allows the text field to grow vertically if the text is bigger than one line.
+
+The select method is called when the onSelected event is triggered. This method will execute the action defined by the command parameter:
+  
+```dart
+  void select(String value) async {
+
+    switch (value) {
+      case menuSave:
+        save();
+        break;
+      case menuDelete:
+        delete();
+        break;
+      case menuBack:
+        Navigator.pop(context, true);
+        break;
+      default:
+    }
+  }
+```
+
+The save method will update the recipe if it already exists or else it will insert a new recipe in the database. Then it returns to the first screen of the application:
+
+```dart
+  void save() {
+  
+    recipe.date = new DateFormat.yMd().format(DateTime.now());
+
+    if (recipe.id != null) {
+      dbHelper.updateRecipe(recipe);
+    } else {
+      dbHelper.insertRecipe(recipe);
+    }
+
+    Navigator.pop(context, true);
+  }
+```
+
+The delete method deletes the recipe from the database if it exists. Then, it returns to the first screen and shows an alert dialog notifying the user that the recipe has been deleted:
+
+```dart
+  void delete() async {
+
+    int result;
+
+    Navigator.pop(context, true);
+    if (recipe.id == null) {
+      return;
+    }
+
+    result = await dbHelper.deleteRecipe(recipe.id);
+
+    if (result != 0) {
+      AlertDialog alertDialog = AlertDialog(
+        title: Text("Delete Recipe"),
+        content: Text("The Recipe has been deleted"),
+      );
+
+      showDialog(context: context, builder: (_) => alertDialog);
+    }
+  }
+```
+
+The convertDifficulty method converts the difficulty from its String meaning to an integer, while retrieveDifficulty converts the int value of the difficulty to its String meaning, by using the int parameter as index in the _difficulties array. For this to work, the values in the _difficulties array need to be arranged accordingly.
+
+```dart
+  void convertDifficulty(String value) {
+    switch (value) {
+      case "Simple":
+        recipe.difficulty = 1;
+        break;
+      case "Average":
+        recipe.difficulty = 2;
+        break;
+      case "Hard":
+        recipe.difficulty = 3;
+        break;
+    }
+
+    setState(() {
+      _difficulty = value;
+    });
+  }
+
+  String retrieveDifficulty(int value) {
+    return _difficulties[value - 1];
+  }
+```
+
+The update methods are used to update the fields of the Recipe object with the values introduced in the TextEditingController text fields:
+
+```dart
+  void updateTitle() {
+    recipe.title = titleController.text;
+  }
+
+  void updateIngredients() {
+    recipe.ingredients = ingredientsController.text;
+  }
+
+  void updateSteps() {
+    recipe.steps = stepsController.text;
+  }
+}
+```
+
+## Putting it all together: The main.dart file
+Duration: 5
+
+It is now time to put together everything that we developed so far in the main.dart file. We replace the initial code with the following:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:recipe_app/screens/recipelist.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+      title: 'Recipes',
+      theme: ThemeData(primarySwatch: Colors.teal,),
+      home: MyHomePage(title: 'Recipes'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: Text(widget.title),
+      ),
+      body: RecipeList(),
+    );
+  }
+}
+```
+
+The final application should look like this:
+
+![flutter app](assets/flutter-tutorial-codelab/recipe_app_part5-1.png)
+![flutter app](assets/flutter-tutorial-codelab/recipe_app_part5-2.png)
+![flutter app](assets/flutter-tutorial-codelab/recipe_app_part5-3.png)
+![flutter app](assets/flutter-tutorial-codelab/recipe_app_part5-4.png)
+
+
