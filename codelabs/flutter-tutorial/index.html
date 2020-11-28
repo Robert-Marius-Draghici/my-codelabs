@@ -27,13 +27,13 @@
                   environment="web"
                   feedback-link="https://github.com/robert-marius-draghici/my-codelabs/issues">
     
-      <google-codelab-step label="What is Flutter?" duration="1">
+      <google-codelab-step label="Part 1: Introduction to Flutter" duration="1">
         <p>Flutter is a free and open-source, cross-platform development framework created by Google. It is used to develop high-performance, native mobile applications for iOS and Android from a single code base. Apart from mobile platforms, it can also be used to develop applications for Windows, Mac, Linux, Google Fuchsia OS and the web.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Why Flutter?" duration="5">
+      <google-codelab-step label="Why Flutter?" duration="2">
         <p>There are three ways to develop applications for mobile:</p>
 <ul>
 <li>native means that we use the native, official tools such as Android Studio with Java and Kotlin for Android or Xcode with Swift and Objective-C for iOS. Even though we can build fast and reliable apps with these tools, the disadvantage is that we need to write the application for each platform.</li>
@@ -59,7 +59,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Create a Hello World project in Flutter." duration="10">
+      <google-codelab-step label="Part 2: Create a Hello World project in Flutter." duration="5">
         <p>Follow the instructions from <a href="https://flutter.dev/docs/get-started/test-drive?tab=androidstudio#androidstudio" target="_blank">here</a> in order to create a new application, which will be named hello_flutter.</p>
 <p>Remove the widget_test.dart file as it will not be required for the moment. Remove the starting code from main.dart and replace with the following:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;; // #1
@@ -76,19 +76,19 @@ void main() { // #2
 }
 </code></pre>
 <ol type="1">
-<li>This package contains Widgets that implement Material design, a design language developed by Google. A package is simply a library of functions.</li>
+<li>This package contains widgets that implement Material design, a design language developed by Google. A package is simply a library of functions.</li>
 <li>The main method is the entry point of a Flutter app.</li>
-<li>The runApp method inflates a Widget and attaches it to the screen. In other words, it will show on the screen the Widget passed to this method.</li>
-<li>Everything in Flutter is a Widget so Center and Text are Widgets. The new keyword is not needed anymore in later versions of Flutter. Center is a container Widget that centers its content onto the screen both horizontally and vertically.</li>
-<li>The child property allows us to nest Widgets inside other Widgets. Text is just a text box.</li>
-<li>The Text Widget requires that a text direction is specified.</li>
+<li>The runApp method inflates a widget and attaches it to the screen. In other words, it will show on the screen the widget passed to this method.</li>
+<li>Everything in Flutter is a widget so Center and Text are widgets. The new keyword is not needed anymore in later versions of Flutter. Center is a container widget that centers its content onto the screen both horizontally and vertically.</li>
+<li>The child property allows us to nest widgets inside other widgets. Text is just a text box.</li>
+<li>The Text widget requires that a text direction is specified.</li>
 </ol>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Enhance the design of the Flutter App." duration="10">
-        <p>In order to enhance the design of the application, we can use a MaterialApp Widget to wrap the other widgets. The MaterialApp Widget is an application that uses material design and wraps a number of widgets that are commonly required for material design applications. The MaterialApp allows us to customize our application with its properties.</p>
+      <google-codelab-step label="Enhance the design of the Flutter App." duration="7">
+        <p>In order to enhance the design of the application, we can use a MaterialApp widget to wrap the other widgets. The MaterialApp widget is an application that uses material design and wraps a number of widgets that are commonly required for material design applications. The MaterialApp allows us to customize our application with its properties.</p>
 <p>Modify the code as follows:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
 
@@ -108,15 +108,15 @@ void main() {
 }
 </code></pre>
 <ol type="1">
-<li>The MaterialApp Widget is usually the container of the other widgets in our application. It allows us to customize our application by adding a title, background color and others. It can also be useful for navigation and routing.</li>
+<li>The MaterialApp widget is usually the container of the other widgets in our application. It allows us to customize our application by adding a title, background color and others. It can also be useful for navigation and routing.</li>
 <li>The title of the application. This is the title that the operating system will see.</li>
 <li>The home property is the widget for the default route of the app. This is the route that is displayed first when the application is started normally, unless initialRoute is specified.</li>
 <li>The Material class allows us to specify the color of its content (the background color in our example). Other properties are: shape, shadow, elevation and other properties that change the way it behaves.</li>
-<li>Previously the Center Widget was passed directly to the runApp method. However, in Flutter Widgets can be nested using the child property.</li>
+<li>Previously the Center widget was passed directly to the runApp method. However, in Flutter widgets can be nested using the child property.</li>
 <li>Specify some style properties for the text. The fontSize requires a double.</li>
 </ol>
 <h2 is-upgraded>Adding an application bar</h2>
-<p>The next step is to add an application bar. This is done by using the Scaffold Widget. The Scaffold class implements the basic material design visual layout structure. It provides APIs for showing drawers, snack bars and bottom sheets among others.</p>
+<p>The next step is to add an application bar. This is done by using the Scaffold widget. The Scaffold class implements the basic material design visual layout structure. It provides APIs for showing drawers, snack bars and bottom sheets among others.</p>
 <p>Modify the code to look like this:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
 
@@ -148,8 +148,8 @@ void main() {
     
       <google-codelab-step label="Code organization for a Flutter application." duration="10">
         <p>Even though we can write the entire application code in the runApp method, this is not recommended especially if the application grows over time. In general, the main method should be as simple as possible.</p>
-<p>The Flutter framework is written in the Dart programming language, which is an object-oriented language. This means that a Widget is nothing more than an object, an instance of a class. Although the Flutter framework provides many Widgets, we can also create our own.</p>
-<p>In order to simplify the main method, we will create a new class called HelloFlutterApp and move the application code in this class. The HelloFlutterApp class will extend the StatelessWidget abstract class, which is a generic Widget that does not have any state. Then, the HelloFlutterApp class needs to override the build method of the superclass. We move the MaterialApp Widget from main to the build method and in the runApp method we return a new instance of HelloFlutterApp. Also, we can further simplify the main method by using the arrow notation.</p>
+<p>The Flutter framework is written in the Dart programming language, which is an object-oriented language. This means that a widget is nothing more than an object, an instance of a class. Although the Flutter framework provides many widgets, we can also create our own.</p>
+<p>In order to simplify the main method, we will create a new class called HelloFlutterApp and move the application code in this class. The HelloFlutterApp class will extend the StatelessWidget abstract class, which is a generic widget that does not have any state. Then, the HelloFlutterApp class needs to override the build method of the superclass. We move the MaterialApp widget from main to the build method and in the runApp method we return a new instance of HelloFlutterApp. Also, we can further simplify the main method by using the arrow notation.</p>
 <p>The code should look like this:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
 
@@ -180,7 +180,7 @@ class HelloFlutterApp extends StatelessWidget { // #2
 <li>The class holding the definition of our application.</li>
 <li>The build method inherited from StatelessWidget needs to be implemented, because it is an abstract method.</li>
 </ol>
-<p>To further modularize the code, we can create a file for each class and files could be structured in packages such as screens, pages etc. For our application, we want to have the home screen (the material Widget in the home property)in a separate file.</p>
+<p>To further modularize the code, we can create a file for each class and files could be structured in packages such as screens, pages etc. For our application, we want to have the home screen (the material widget in the home property)in a separate file.</p>
 <p>Create a new folder called screens in the lib directory. Then create a file home.dart and a class Home and move the code from the body property in the build method of the Home class.</p>
 <p>The home.dart file should look like this:</p>
 <pre><code>import &#39;package:flutter/material.dart&#39;;
@@ -228,7 +228,7 @@ class HelloFlutterApp extends StatelessWidget {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Adding logic to a Flutter application." duration="10">
+      <google-codelab-step label="Adding logic to a Flutter application." duration="7">
         <p>Since Widgets are instances of a class, we can add our own methods to a class to perform the business logic.</p>
 <p>For our application, we want to customize the text shown in the Home screen. For this, we create a new method in the Home class called sayHello which returns a String.</p>
 <p>Dart is a strongly typed language meaning that if we declare a variable of type String (String hello; for instance) then we cannot change its type later in the code. However, if we declare hello using var (var hello;) then hello can hold any type. It is recommended to specify the specific type for a variable and not use var. Numbers can be of type int, double and num (num can be either an int or a double).</p>
@@ -279,6 +279,1370 @@ class Home extends StatelessWidget {
 <li>Replace the hard-coded String with the one returned by the sayHello method.</li>
 <li>We want the minutes to be shown in two digits.</li>
 </ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 3: The Basic Widgets of Flutter" duration="1">
+        <p>Flutter provides a set of basic Widgets that can be used along with Scaffold and AppBar in order to develop applications. This basic Widgets include:</p>
+<ul>
+<li>Container</li>
+<li>Text</li>
+<li>Row and Column</li>
+<li>Image</li>
+<li>RaisedButton</li>
+<li>AlertDialog</li>
+<li>Box Constraints</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Container" duration="5">
+        <p>Container is a widget class that allows you to customize its child widget through its properties. It can be seen as the equivalent of the div class from html. The Container widget allows us to specify properties such as:</p>
+<ul>
+<li>alignment = aligns the child widget within the container.</li>
+<li>color = the background color of the container.</li>
+<li>constraints = additional constraints to apply to the child widget.</li>
+<li>clipBehaviour = describes the clip behaviour when Container.decoration is not null.</li>
+<li>decoration = the decoration to paint behind the child widget.</li>
+<li>foregroundDecoration = the decoration to paint in front of the child widget.</li>
+<li>height and width = specifies the container size and is affected by box constraints. If we view the widget as a box, then the box constraints are the minimum and maximum width and height of the widget. Some widgets impose their constraints on their child widgets, which means that the child&#39;s width and height parameters are ignored, while other widgets (such as Center) loosen their constraints so that the maximum is preserved but the minimum is ignored.</li>
+<li>margin = the distance between a widget and the other widgets on the screen.</li>
+<li>padding = the distance between the content of a widget and its borders.11</li>
+</ul>
+<p>Both margin and padding use the EdgeInsets.All(10.0) constructor which creates a margin or padding on all 4 sides of a box.</p>
+<p>Container widget example:</p>
+<pre><code>Container(
+  alignment: Alignment.center,
+  color: Colors.teal,
+  width: 192.0,
+  height: 96.0,
+  child: Text(&#34;This is a container widget&#34;, textDirection: TextDirection.ltr,)
+)
+</code></pre>
+<p>More details about the Container widget can be found <a href="https://api.flutter.dev/flutter/widgets/Container-class.html" target="_blank">here</a> .</p>
+<p>More details about box constraints can be found <a href="https://flutter.dev/docs/development/ui/layout/box-constraints" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Text" duration="5">
+        <p>The Text widget displays a string of text with a single style. The string can be single line or multiline. The Text widget provides properties such as:</p>
+<ul>
+<li>data = the string of text to be displayed.</li>
+<li>textDirection = the directionality of the text such as left-to-right or right-to-left.</li>
+<li>style = a TextStyle object which describes how to format and paint text. It has properties such as fontSize, decoration, fontFamily and weight.</li>
+</ul>
+<p>Text widget example:</p>
+<pre><code>Text(
+  &#34;This is a text widget.&#34;,
+  textDirection: TextDirection.ltr,
+  style: TextStyle(
+	  fontSize: 50,
+	  decoration: TextDecoration.none,
+	  fontFamily: &#39;Schyler&#39;,
+	  fontWeight: FontWeight.normal),
+)
+</code></pre>
+<p>If we want to use a custom font, we have to:</p>
+<ol type="1">
+<li>import the font files. Font files can be downloaded from https://fonts.google.com/ and the .ttf files must be added in the fonts folder.</li>
+<li>declare the font in the pubspec.yaml file. The pubspec.yaml file contains information about project metadata and dependencies. Example of font definition:<pre><code>fonts:
+    - family: Oswald
+        fonts:
+            - asset: fonts/Oswald-Regular.ttf
+            - asset: fonts/Oswald-Medium.ttf
+              style: italic
+            - asset: fonts/Oswald-Light.ttf
+              weight: 300
+            - asset: fonts/Oswald-ExtraLight.ttf
+              weight: 100
+            - asset: fonts/Oswald-SemiBold.ttf
+              weight: 600
+            - asset: fonts/Oswald-Bold.ttf
+              weight: 800
+</code></pre>
+</li>
+<li>use the font in the widget.</li>
+</ol>
+<p>More details about the Text widget can be found <a href="https://api.flutter.dev/flutter/widgets/Text-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Row and Column" duration="3">
+        <p>The Row and Column widgets allow us to better group the widgets in an application. The Row widget is a list of child widgets placed horizontally, while the Column widget is a list of child widgets placed vertically. Since these widgets contain an array of widgets, they have a children property instead of a child property.</p>
+<p>Row widget example:</p>
+<pre><code>Row(
+  children: [
+	Text(
+	  &#34;This is the first row.&#34;,
+	  textDirection: TextDirection.ltr,
+	),
+	Expanded( // #1
+		child: Text(
+	  &#34;This is the second row.&#34;,
+	  textDirection: TextDirection.ltr,
+	)),
+  ],
+)
+</code></pre>
+<ol type="1">
+<li>If there are more children in a Row that will not fit in the available room, we can wrap the children widgets in an Expanded widget which will expand the content of the widget in order to fit the available space.</li>
+</ol>
+<p>Column widget example:</p>
+<pre><code>Column(
+  children: [
+	Row(children: [...]),
+	Row(children: [...]),
+  ],
+)
+</code></pre>
+<p>More details about the Row widget can be found <a href="https://api.flutter.dev/flutter/widgets/Row-class.html" target="_blank">here</a> .</p>
+<p>More details about the Column widget can be found <a href="https://api.flutter.dev/flutter/widgets/Column-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Image" duration="3">
+        <p>The Image widget is used to display an image. The image can come from the following sources:</p>
+<ul>
+<li>a file</li>
+<li>assets which are resources that we add to the project</li>
+<li>the network from an URL</li>
+<li>ImageProvider class</li>
+<li>the memory where it is stored as an Uint8List.</li>
+</ul>
+<p>Flutter accepts images in many formats, however it does not support .svg files yet. Images can be downloaded from <a href="https://openclipart.org/" target="_blank">https://openclipart.org/</a> . To import the images we need to uncomment the assets section from the pubspec.yaml file and add the path to the image:</p>
+<pre><code>  assets:
+   - images/image.png
+</code></pre>
+<p>To use an image imported from the assets, we define an AssetImage object and we pass this object to the Image constructor:</p>
+<pre><code>AssetImage imageAsset = AssetImage(&#39;images/image.png&#39;);
+Image image = Image(image: imageAsset, width: 400.0, height: 400.0);
+</code></pre>
+<p>More details about the Image widget can be found <a href="https://api.flutter.dev/flutter/widgets/Image-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RaisedButton and AlertDialog" duration="3">
+        <p>A raised button is based on a Material widget whose Material.elevation increases when the button is pressed. RaisedButton adds dimension to otherwise mostly flat layouts, such as a long lists of content or wide empty spaces.</p>
+<p>RaisedButton widget example:</p>
+<pre><code>RaisedButton(
+  child: Text(&#34;Raised button&#34;),
+  color: Colors.deepPurple,
+  elevation: 5.0,
+  onPressed: () { // #1
+	callback(context);
+  },
+)
+</code></pre>
+<ol type="1">
+<li>A RaisedButton needs the onPressed property which is an anonymous method that performs an action when the button is pressed. If this property is not set, the button will be flat and greyed out.</li>
+</ol>
+<p>In the callback method we can use an alert dialog to give feedback to the user. An AlertDialog informs the user about situations that require acknowledgement. An alert dialog has an optional title and an optional list of actions. The title is displayed above the content and the actions are displayed below the content.</p>
+<p>AlertDialog widget example:</p>
+<pre><code>var alert = AlertDialog(
+	title: Text(&#34;AlertDialog Title&#34;),
+	content: Text(&#34;AlertDialog Content&#34;), 
+);
+showDialog(
+	context: context,
+	builder: (BuilderContext) =&gt; alert
+);
+</code></pre>
+<p>More details about the RaisedButton widget can be found <a href="https://api.flutter.dev/flutter/material/RaisedButton-class.html" target="_blank">here</a> .</p>
+<p>More details about the AlertDialog widget can be found <a href="https://api.flutter.dev/flutter/material/AlertDialog-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Practical application for Part 3: University Courses app" duration="15">
+        <p>Now we will develop a small application to put in practice all the widgets presented during this part. The application will have one screen which shows some university courses along with their teachers, an image and a raised button to accept the courses presented on the screen.</p>
+<p>We begin with the main method in main.dart.</p>
+<pre><code>import &#39;package:course_management/home.dart&#39;;
+import &#39;package:flutter/material.dart&#39;; // #1
+
+void main() =&gt; runApp(MyApp()); // #2
+
+class MyApp extends StatelessWidget { 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp( // #3
+      title: &#39;University Courses&#39;,
+      home: Home(), // #4
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+</code></pre>
+<ol type="1">
+<li>Import the required packages.</li>
+<li>We want the main function to be as concise as possible so we write the application code in the MyApp class.</li>
+<li>The application uses material design.</li>
+<li>The content for the home screen is in another class, so our code will be more modular.</li>
+</ol>
+<p>After writing the main class, we create the home.dart file where we will write the code for the home screen.</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;; 
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container( // #1
+      child: Column( // #2
+        children: &lt;Widget&gt;[
+          text(&#34;University Courses&#34;, Colors.yellow, &#39;PTSerif&#39;, 50.0, // #3
+              FontWeight.w400),
+          Row(
+            children: &lt;Widget&gt;[
+              Expanded(
+                  child: text(&#34;Subject&#34;, Colors.deepOrange, &#39;PTSerif&#39;, 30.0,
+                      FontWeight.w500)),
+              Expanded(
+                  child: text(&#34;Teacher&#34;, Colors.deepOrange, &#39;PTSerif&#39;, 30.0,
+                      FontWeight.w500)),
+            ],
+          ),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(
+                    &#34;Physics&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+            Expanded(
+                child: text(&#34;Archimedes&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+          ]),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(&#34;Geometry&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+            Expanded(
+                child: text(
+                    &#34;Euclid&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+          ]),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(
+                    &#34;History&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+            Expanded(
+                child: text(&#34;Herodotus&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+          ]),
+          Row(children: &lt;Widget&gt;[
+            Expanded(
+                child: text(
+                    &#34;Biology&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0, FontWeight.w300)),
+            Expanded(
+                child: text(&#34;Hippocrates&#34;, Colors.amber, &#39;PTSerif&#39;, 30.0,
+                    FontWeight.w300)),
+          ]),
+          Row(
+            children: &lt;Widget&gt;[
+              Image(
+                image: AssetImage(&#39;images/university.png&#39;),
+                width: 200.0,
+                height: 200.0,
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          Row(
+            children: &lt;Widget&gt;[
+              RaisedButton(
+                child: Text(&#34;Accept courses&#34;),
+                color: Colors.lime,
+                elevation: 5.0,
+                onPressed: () {
+                  onPressed(context);
+                },
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        ],
+      ),
+      color: Colors.teal,
+      padding: EdgeInsets.all(10.0),
+    );
+  }
+
+  Widget text(String data, MaterialColor color, String fontFamily,
+      double fontSize, FontWeight fontWeight) {
+    return Text(data,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          decoration: TextDecoration.none,
+          color: color,
+          fontFamily: fontFamily,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        ));
+  }
+
+  void onPressed(BuildContext context) { // #4
+    var alert = AlertDialog(
+      title: Text(&#34;Accept courses&#34;),
+      content: Text(&#34;Courses accepted.&#34;),
+    );
+    showDialog(context: context, builder: (BuildContext) =&gt; alert);
+  }
+}
+</code></pre>
+<ol type="1">
+<li>We wrap the widgets composing the screen in a Container widget.</li>
+<li>We use rows and columns to group the different elements on the screen.</li>
+<li>Since there are many text fields in this application, we moved the Text widget in a separate method with the required parameters in order to avoid duplicating code.</li>
+<li>The onPressed function is called whenever the button is pressed.</li>
+</ol>
+<p>Since we use a custom font and an image, we also need to update the assets and fonts sections of the pubspec.yml file.</p>
+<pre><code>  ...
+  assets:
+   - university.png
+  ...
+  fonts:
+  - family: PTSerif
+   fonts:
+     - asset: fonts/PTSerif-Regular.ttf
+     - asset: fonts/PTSerif-Italic.ttf
+       style: italic
+     - asset: fonts/PTSerif-Bold.ttf
+       weight: 700
+     - asset: fonts/PTSerif-BoldItalic.ttf
+       style: italic
+       weight: 700
+  ...
+</code></pre>
+<p>The final application should look like this:</p>
+<p class="image-container"><img alt="flutter app" src="img/63ad6f5d5c0c6f7b.png"><img alt="flutter app" src="img/8f397d9c5a60be14.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 4: Interactivity in Flutter" duration="5">
+        <p>So far, the applications that we developed showed only static content using non-interactive and stateless widgets. However, more advanced applications should allow the user to input data and react to this input. For an application to be able to handle user input, it needs to maintain state. State represents the information that can be read synchronously when the widget is built (initialisation stage) and might change during the lifetime of the widget.</p>
+<p>In Flutter, it is not the widget that changes, but the State associated with it. Classes that inherit StatefulWidget are immutable, while the State class is mutable.</p>
+<h2 is-upgraded>Differences between StatelessWidget and StatefulWidget</h2>
+<table>
+<tr></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>StatelessWidget</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>StatefulWidget</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Does not require a mutable state #1</p>
+</td><td colspan="1" rowspan="1"><p>Has mutable state</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Overrides the build() method #2</p>
+</td><td colspan="1" rowspan="1"><p>Overrides the createState() method and returns a State</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Use when the UI depends on information in the object itself</p>
+</td><td colspan="1" rowspan="1"><p>Use when the UI can change dynamically</p>
+</td></tr>
+</table>
+<ol type="1">
+<li>In other words, a StatelessWidget cannot change its state during the runtime of the application, meaning that the widget cannot be redrawn while the app is running. On the other hand, a StatefulWidget can change its state multiple times within its lifetime and can be redrawn on to the screen any number of times while the app is running.</li>
+<li>Extending StatelessWidget requires overriding the build() method where you define the UI of the application. However, when you extend a StatefulWidget you need to override the createState() method which returns the state. This means that the UI is not defined in the widget, but in the state. The state class is the one that implements the build method by extending the State class.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How to use a StatefulWidget" duration="3">
+        <ol type="1">
+<li>Create a class that extends the StatefulWidget class and implements the createState method which returns a state class.</li>
+<li>Create the state class which contains the properties that will change during the lifetime of the widget. The state class extends the State class, where T is the name of the widget class that extends StatefulWidget. Usually the name of the state class should start with _ in order to emphasize that it is private and should respect the template  + &#34;State&#34;.</li>
+<li>Since the state class extends State, it must implement the build method which returns a Widget. This build method is the same as the one implemented by a stateless widget.</li>
+<li>To make changes call the setState() method. Changes are usually made through events, which are treated as normal properties of a Widget. The event triggers every time the content of the widget changes.</li>
+</ol>
+<pre><code>class ClassWithState extends StatefulWidget { #1
+    @override
+    State&lt;StatefulWidget&gt; createState() =&gt; _ClassWithStateState(); #1
+}
+
+class _ClassWithStateState extends State&lt;ClassWithState&gt; { #2
+    String state = &#34;&#34;;
+    
+    @override
+    Widget build(BuildContext context) { #3
+        ...
+        eventProperty: (String value) {
+            setState(() {state = value;}); #4
+        }
+        ... 
+    }
+}
+</code></pre>
+<p>Examples of events include:</p>
+<ul>
+<li>onChanged which changes the widget as soon as a change is made;</li>
+<li>onSubmitted which sets the state only after the Enter button on the keyboard is pressed;</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DropdownButton and DropdownMenuItem" duration="5">
+        <p>DropdownButton is a material design button that lets the user select from a number of items. The button shows the currently selected item as well as an arrow that opens a menu for selecting another item.</p>
+<p>DropdownButton is a generic class which means that a type T needs to be specified when using it. The type T is the type of the value that each dropdown item represents. All the entries in the dropdown menu have to be of the same type. The items in a dropdown menu are instances of DropdownMenuItem class.</p>
+<p>The onChanged callback should update a state variable that defines the dropdown&#39;s value. It should also call State.setState to rebuild the dropdown with the new value.</p>
+<p>A dropdown button should look like this:</p>
+<pre><code>DropdownButton&lt;T&gt;(
+    items: &lt;T&gt;[item_1, item_2, ..., item_n].map((T value) { // #1
+        return DropdownMenuItem&lt;T&gt;(
+            value: value,
+            child: &lt;child widget&gt;,
+        );
+    }).toList(), // #2
+    value: &lt;value of type T&gt;, // #3
+    onChanged: (T value) {
+        setState(() {state = value;});
+    },
+)
+</code></pre>
+<ol type="1">
+<li>The items property is an array with the possible values to choose from in the dropdown. Map is a method that iterates though all the values from the array and perform a function on each of them.</li>
+<li>toList collects all the elements that are returned by map into a list.</li>
+<li>The value property is the current selected value from the dropdown menu.</li>
+</ol>
+<p>More details about the DropdownButton widget can be found <a href="https://api.flutter.dev/flutter/material/DropdownButton-class.html" target="_blank">here</a> .</p>
+<p>More details about the DropdownMenuItem widget can be found <a href="https://api.flutter.dev/flutter/material/DropdownMenuItem-class.html" target="_blank">here</a> .</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Practical application for Part 4: Temperature Converter" duration="15">
+        <p>To practice with StatefulWidgets and DropdownButtons, we will build a Temperature Converter application.</p>
+<p>We begin with the main method and the MyApp class:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Temperature converter&#39;,
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: TemperatureConverter(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+</code></pre>
+<p>Next, we write the TemperatureConverter class which extends a StatefulWidget:</p>
+<pre><code>class TemperatureConverter extends StatefulWidget {
+  @override
+  State&lt;StatefulWidget&gt; createState() =&gt; _TemperatureConverterState();
+}
+</code></pre>
+<p>Then, we write the state class where the UI is actually implemented.</p>
+<p>The state of a widget is represented by the properties of the class that are mutable.</p>
+<pre><code>class _TemperatureConverterState extends State&lt;TemperatureConverter&gt; {
+  final double _padding = 5.0;
+  final _temperatureScales = [&#39;Celsius&#39;, &#39;Fahrenheit&#39;, &#39;Kelvin&#39;];
+  TextEditingController sourceTemperatureController = TextEditingController();
+  String result = &#39;&#39;;
+  String currentSourceScale = &#39;Celsius&#39;;
+  String currentTargetScale = &#39;Fahrenheit&#39;;
+</code></pre>
+<p>Since _TemperatureConverterState extends State, it must implement the build method that returns the Widget representing the UI.</p>
+<pre><code>  @override
+  Widget build(BuildContext context) {
+    TextStyle textStyle = Theme.of(context).textTheme.headline6; // #1
+
+    return Scaffold( // #2
+      appBar: AppBar( // #3
+        title: Text(&#34;Temperature Converter App&#34;),
+        backgroundColor: Colors.teal,
+      ),
+</code></pre>
+<ol type="1">
+<li>If we do not want to import a custom font for our textStyle property, then we can extract the textStyle from the theme of the context. The TextTheme class contains the definition of several text styles found in Material design. More details can be found <a href="https://api.flutter.dev/flutter/material/TextTheme-class.html" target="_blank">here</a>.</li>
+<li>Scaffold is a widget that implements the layout of the application. It provides APIs for showing drawers, snack bars, and bottom sheets. More details can be found <a href="https://api.flutter.dev/flutter/material/Scaffold-class.html" target="_blank">here</a>.</li>
+<li>The AppBar widget consists of a toolbar and potentially other widgets, usually placed at the top of the application. App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen. More information can be found <a href="https://api.flutter.dev/flutter/material/AppBar-class.html" target="_blank">here</a>.</li>
+</ol>
+<p>The body property of the Scaffold contains the primary content of the scaffold:</p>
+<pre><code>      body: Container(
+        padding: EdgeInsets.all(15.0),
+        child: Column(children: &lt;Widget&gt;[
+            Padding( // #1
+              padding: EdgeInsets.only(top: _padding, bottom: _padding),
+              child: Row(
+                children: &lt;Widget&gt;[
+                  Expanded(
+                    child: TextField( #2
+                      controller: sourceTemperatureController, // #3
+                      decoration: InputDecoration( // #4
+                          hintText: &#34;e.g. 30&#34;, // #5
+                          labelText: &#34;Source Temperature&#34;, // #6
+                          labelStyle: textStyle, // #7
+                          border: OutlineInputBorder( // #8
+                              borderRadius: BorderRadius.circular(5.0))),
+                      keyboardType: TextInputType.number, // #9
+                    ),
+                  ),
+                  DropdownButton&lt;String&gt;(
+                    items: _temperatureScales
+                        .map((String value) =&gt; DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            ))
+                        .toList(),
+                    value: currentSourceScale,
+                    onChanged: (String value) {
+                      setState(() {
+                        this.currentSourceScale = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+</code></pre>
+<ol type="1">
+<li>The Padding widget insets its child by the given padding. More details can be found <a href="https://api.flutter.dev/flutter/widgets/Padding-class.html" target="_blank">here</a>.</li>
+<li>The TextField widget lets the user enter text, either with hardware keyboard or with an onscreen keyboard. More details can be found <a href="https://api.flutter.dev/flutter/material/TextField-class.html" target="_blank">here</a>.</li>
+<li>The TextEditingController class is a controller for an editable text field. Whenever the user modifies a text field with an associated TextEditingController, the text field updates value and the controller notifies its listeners. More details can be found <a href="https://api.flutter.dev/flutter/widgets/TextEditingController-class.html" target="_blank">here</a>. This class is a shortcut to creating a variable and updating it with the onChanged event.</li>
+<li>InputDecoration is the decoration to show around the text field. More details can be found <a href="https://api.flutter.dev/flutter/material/InputDecoration-class.html" target="_blank">here</a>.</li>
+<li>The hintText property suggests what sort of input the field accepts.</li>
+<li>The labelText property describes the input field.</li>
+<li>The labelStyle property is the style to use for the labelText when the label is above the input field.</li>
+<li>The border property specifies the shape of the border to draw around the decoration&#39;s container.</li>
+<li>Since the text field can only contain numbers (it is a temperature), we can use the property keyboardType to specify the type of keyboard to use for editing the text, in this case a keyboard with only numbers.</li>
+</ol>
+<p>These widgets define the rest of the layout:</p>
+<pre><code>            Padding(
+              padding: EdgeInsets.only(top: _padding, bottom: _padding),
+              child: Row(
+                children: &lt;Widget&gt;[
+                  Expanded(
+                    child: Text(
+                      &#34;Target temperature is &#34; + result + &#34; degrees&#34;,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16.0),
+                    ),
+                  ),
+                  DropdownButton&lt;String&gt;(
+                    items: _temperatureScales
+                        .map((String value) =&gt; DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            ))
+                        .toList(),
+                    value: this.currentTargetScale,
+                    onChanged: (String value) {
+                      setState(() {
+                        this.currentTargetScale = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: _padding, bottom: _padding),
+              child: Row(
+                children: &lt;Widget&gt;[
+                  Expanded(
+                    child: RaisedButton(
+                      color: Theme.of(context).primaryColorDark,
+                      textColor: Theme.of(context).primaryColorLight,
+                      onPressed: () {
+                        setState(() {
+                          result = _convert();
+                        });
+                      },
+                      child: Text(
+                        &#39;Convert&#39;,
+                        textScaleFactor: 1.5,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: RaisedButton(
+                    color: Theme.of(context).buttonColor,
+                    textColor: Theme.of(context).primaryColorDark,
+                    onPressed: () {
+                      setState(() {
+                        _reset();
+                      });
+                    },
+                    child: Text(
+                      &#39;Reset&#39;,
+                      textScaleFactor: 1.5,
+                    ),
+                  )),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+</code></pre>
+<p>This methods implement the logic for converting a temperature and reseting the form by deleting the contents of the fields.</p>
+<pre><code>  String _convert() {
+    double sourceTemperature = double.parse(sourceTemperatureController.text);
+    double targetTemperature;
+    if (currentSourceScale == &#34;Celsius&#34;) {
+      if (currentTargetScale == &#34;Fahrenheit&#34;) {
+        setState(() { targetTemperature = sourceTemperature * 1.8 + 32; });
+      } else if (currentTargetScale == &#34;Kelvin&#34;) {
+        setState(() { targetTemperature = sourceTemperature + 273.15; });
+      } else { setState(() { targetTemperature = sourceTemperature; }); }
+    }
+
+    if (currentSourceScale == &#34;Fahrenheit&#34;) { 
+      if (currentTargetScale == &#34;Celsius&#34;) {
+        setState(() { targetTemperature = (sourceTemperature - 32) / 1.8; });
+      } else if (currentTargetScale == &#34;Kelvin&#34;) {
+        setState(() { targetTemperature = (sourceTemperature + 459.67) * 5 / 9; });
+      } else { setState(() { targetTemperature = sourceTemperature; }); }
+    }
+
+    if (currentSourceScale == &#34;Kelvin&#34;) {
+      if (currentTargetScale == &#34;Celsius&#34;) {
+        setState(() { targetTemperature = sourceTemperature - 273.15; });
+      } else if (currentTargetScale == &#34;Fahrenheit&#34;) {
+        setState(() { targetTemperature = sourceTemperature * 9 / 5 - 459.67; });
+      } else { setState(() { targetTemperature = sourceTemperature; }); }
+    }
+
+    result = targetTemperature.toStringAsFixed(2);
+    return result;
+  }
+
+  void _reset() {
+    sourceTemperatureController.text = &#34;&#34;;
+    setState(() { result = &#34;&#34;; });
+  }
+}
+</code></pre>
+<p>The final application should look like this:</p>
+<p class="image-container"><img alt="flutter app" src="img/3db81c6f9b5d27fd.png"></p>
+<p>You can test that the application works properly by using this <a href="https://www.rapidtables.com/convert/temperature/index.html" target="_blank">online temperature converter</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Part 5: Develop a real world application in Flutter." duration="1">
+        <p>The goal of this part is to develop a real world application in Flutter by combining most of the concepts learned in the previous parts and introducing new concepts such as navigation or database storage.</p>
+<p>The application we are going to develop is a recipe application, that allows us to write new recipes or read the existing ones.</p>
+<p>To make the application easier to understand and maintain, we will break it into several modules. After creating a new project, we create 3 folders:</p>
+<ul>
+<li>model - the model classes used by the database</li>
+<li>screens - the screens of the application</li>
+<li>util - utility functions</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="The Model Class" duration="10">
+        <p>In our application we need to define a model class for the recipe. A model class is typically used to &#34;model&#34; the data in your application by mirroring the data source such as a database or a JSON. The model class holds all properties, constructors and methods.</p>
+<p>In the model folder, we create the recipe.dart file where we will define the Recipe model class:</p>
+<pre><code>class Recipe {
+</code></pre>
+<p>First, we define the properties that describe a recipe such as a title, the ingredients, the steps to follow and the difficulty. The id property is required for the database. Optionally, we can specify a date for the recipe.</p>
+<p>The _ from the property names means that the field is private, not accesible from outside the class.</p>
+<pre><code>  int _id; 
+  String _title;
+  String _ingredients;
+  String _steps;
+  int _difficulty;
+  String _date;  
+</code></pre>
+<p>Then, we need to define a way to instantiate the Recipe objects with constructors. Constructors are a special method that is used to initialize an object when created in the program. They have the same name as the class name and don&#39;t have any return type.</p>
+<p>In Dart, if we do not define a constructor, the compiler will automatically create the default constructor that doesn&#39;t have any parameters in it. However, if we define a constructor, the default constructor will not be created. The syntax for creating a constructor is the following:</p>
+<pre><code>class_name( [ parameters ] ){
+    // Constructor Body
+}
+</code></pre>
+<p>We want to define two constructors with parameters, one without the id and one with it. We need to make this distinction, because the id is assigned when the recipe is inserted in the database and not when creating the object.</p>
+<p>The notation used below for the constructor is a shorthand notation in Dart using the keyword this. In this way, the value you pass in the parameter will be directly linked to the corresponding object property in the constructor. Optional parameters are enclosed in square brackets.</p>
+<pre><code>    Recipe(this._title, this._ingredients, this._steps, this._difficulty, [this._date]); 
+</code></pre>
+<p>In Dart, we can&#39;t define two constructors with the same name even though they have different parameters. To solve this problem, Dart introduced named constructors, which allow the user to make multiple constructors with a different name, using this syntax:</p>
+<pre><code>class_name.constructor_name ( parameters ){
+   // Body of Constructor
+}
+</code></pre>
+<p>We will name the second constructor withId:</p>
+<pre><code>  Recipe.withId(this._id, this._title, this._ingredients, this._steps, this._difficulty, [this._date]); 
+</code></pre>
+<p>Next, we will define getters for the properties. If we do not want to make any change to the properties before accessing them, then we can use the fat arrow notation to shorten the method.</p>
+<pre><code>  int get id =&gt; _id;
+  String get title =&gt; _title;
+  String get ingredients =&gt; _ingredients;
+  String get steps =&gt; _steps;
+  int get difficulty =&gt; _difficulty;
+  String get date =&gt; _date;
+</code></pre>
+<p>Then, we define the setters for the properties. We do not need a setter for the id, because once it is set by the database we do not want to change it. We can also use the setter to check if the input supplied respects some constraints such as minimum/maximum length. If the values are not what we expect, we can also throw errors from the setter.</p>
+<pre><code>  set title(String value) {
+    if (value.length &lt;= 100) {
+      _title = value;
+    }
+  }
+
+  set ingredients(String value) {
+    _ingredients = value;
+  }
+
+  set steps(String value) {
+    _steps = value;
+  }
+
+  set difficulty(int value) {
+    _difficulty = value;
+  }
+  
+  set date(String value) {
+    _date = value;
+  }
+</code></pre>
+<p>We will also define some helper methods that convert the recipe object into a Map (a key-value pair collection) and vice versa. The second method will be implemented as another named constructor. These methods will be helpful for interacting with the database.</p>
+<pre><code>  Map &lt;String, dynamic&gt; toMap() {
+    var map = Map&lt;String, dynamic&gt;();
+    
+    map[&#34;title&#34;] = _title;
+    map[&#34;ingredients&#34;] = _ingredients;
+    map[&#34;steps&#34;] = _steps;
+    map[&#34;difficulty&#34;] = _difficulty;
+    map[&#34;date&#34;] = _date;
+    
+    if (_id != null) {
+      map[&#34;id&#34;] = _id;
+    }
+    
+    return map;
+  }
+
+  Recipe.fromObject(dynamic o) {
+    this._id = o[&#34;id&#34;];
+    this._title = o[&#34;title&#34;];
+    this._ingredients = o[&#34;ingredients&#34;];
+    this._steps = o[&#34;steps&#34;];
+    this._difficulty = o[&#34;difficulty&#34;];
+    this._date = o[&#34;date&#34;];
+  }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="The Database" duration="15">
+        <p>In our application we will make use of SQFLite, which is a Flutter plugin that allows us to use SQLite. According to sqlite.org, SQLite is an in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. To understand this definition better, we will break it into concepts and explain them:</p>
+<ul>
+<li>self-contained means that SQLite needs very little support from external libraries. This is useful if we want to develop a light-weight, platform independent application.</li>
+<li>serverless means that SQLite reads and writes directly from the database files on disk. This means that we do not have to setup a client-server connection in order to use it.</li>
+<li>zero-configuration means that there is no installation or setup required.</li>
+<li>transactional means that all changes in a transaction occur completely or not at all. If the program crashes in the middle of the transation, no data will be written in the database, making it secure and reliable.</li>
+<li>also, since it is a SQL database engine, we can use the SQL language to build queries.</li>
+</ul>
+<h2 is-upgraded>Installing dependencies</h2>
+<p>In order to use SQLite in the application, the SQFLite plugin needs to be installed, by specifying it in the pubspec.yaml file. Apart from the sqflite plugin, we will also need to define the following dependencies:</p>
+<ul>
+<li>path_provider (any) which finds commonly used locations on the filesystem. We use this package to find the database location which is different on Android and iOS devices. Using this package we don&#39;t have to worry about the physical path of the OS.</li>
+<li>intl (^0.15.7) which is an internationalization package used among others for date/number formatting and parsing.</li>
+</ul>
+<pre><code>dependencies:
+  sqflite: any
+  path_provider: any
+  intl: ^0.15.7
+</code></pre>
+<h2 is-upgraded>Interacting with the database</h2>
+<p>There are two ways to interact with SQLite in Flutter:</p>
+<ol type="1">
+<li>use the SQL language directly:</li>
+</ol>
+<pre><code>db.rawQuery(&#34;SELECT * FROM myTable&#34;);
+db.rawInsert(&#39;INSERT INTO myTable(title, description) VALUES(&#34;some title&#34;, &#34;some description&#34;)&#39;);
+db,rawUpdate(&#39;UPDATE myTable SET title = ?, WHERE title = ?&#39;, [&#34;new title&#34;, &#34;old title&#34;]);
+db.rawDelete(&#39;DELETE FROM myTable WHERE id = 1&#39;);
+</code></pre>
+<ol type="1">
+<li>use the SQFLite helpers:</li>
+</ol>
+<pre><code>db.update(&#39;myTable&#39;,
+          myObject.toMap(), // this is why we defined a toMap method in the model class
+          where: &#34;$colId = ?&#34;,
+          whereArgs: [myObject.id]);
+</code></pre>
+<p>Both of these approaches are asynchronous, because accessing the database can take a long time and it would render the application unresponsive if they would be synchronous.</p>
+<h2 is-upgraded>Asynchronous programming in Flutter</h2>
+<p>When a Flutter application is started, a single thread (path of exection) is automatically created. This thread is the main thread of the application and is also named the UI thread, because one of its responsibilities is to draw all the widgets on the screen and responding to user input. If we run long operations such as database queries on the main thread, it could render the application unresponsive. To counter this problem, we can delegate such long tasks to other secondary threads to run in parallel, so that the main thread would remain responsive. When the secondary threads finish their tasks, they return their results to the main thread which will react accordingly.</p>
+<p>In Flutter, asynchronous programming is implemented using Future, Async and Await.</p>
+<p>A Future represents an object that will return a value sometime in the future. If we create a method that returns a Future, when we call it, we will immediately receive a Future object and the method will spawn a secondary thread to do the task. When the tasks are finished, the then method from the main thread is called with the result.</p>
+<pre><code>Future&lt;List&gt; getRecipes() {
+  // secondary thread
+}  
+
+recipesFuture = getRecipes().then((result) {
+  // main thread
+}
+</code></pre>
+<p>The async and await keywords allow us to write asynchronous code that looks like synchronous one. We use the await keyword for long performing tasks. A method marked as async must return a Future or if it is void, it will return a Future wrapped around a null.</p>
+<pre><code>void doSomething() async {
+  result = await getRecipes();
+}
+</code></pre>
+<h2 is-upgraded>Implement the database helper class</h2>
+<p>Next we will create a file called dbhelper.dart in the util folder.</p>
+<p>We begin by importing the required packages:</p>
+<pre><code>import &#39;package:sqflite/sqflite.dart&#39;;
+import &#39;dart:async&#39;;
+import &#39;dart:io&#39;;
+import &#39;package:path_provider/path_provider.dart&#39;;
+import &#39;package:recipe_app/model/recipe.dart&#39;;
+</code></pre>
+<p>Then, we define the class and define some constants that will help with the queries:</p>
+<pre><code>class DbHelper {
+  String tblRecipe = &#34;recipe&#34;;
+  String colId = &#34;id&#34;;
+  String colTitle = &#34;title&#34;;
+  String colIngredients= &#34;ingredients&#34;;
+  String colSteps = &#34;steps&#34;;
+  String colDifficulty = &#34;difficulty&#34;;
+  String colDate = &#34;date&#34;;
+</code></pre>
+<p>Since the DbHelper class will be used to retrieve the database and make reads and writes over it, a single instance for the entire application will be enough. Then, it would be useful to restrict its instantiation to one object only using the Singleton pattern. To implement the Singleton pattern in Dart we need to:</p>
+<ol type="1">
+<li>create a private instance of the class using a named private constructor;</li>
+<li>create the empty private named constructor;</li>
+<li>use the factory constructor which is public to always return the same instance. The factory constructor is a Dart feature that allows us to override the default behaviour when we instantiate an object. Instead of always creating a new instance, we instruct the factory constructor to always return the same instance, the private instance.</li>
+</ol>
+<p>Now we will add the Singleton pattern implementation to the DbHelper class:</p>
+<pre><code>  static final DbHelper _dbhelper = DbHelper._internal(); // #1
+  
+  DbHelper._internal(); // #2
+
+  factory DbHelper() { // #3
+    return _dbhelper;
+  }
+</code></pre>
+<p>Next, we will implement a method to initialize the database:</p>
+<pre><code>  Future&lt;Database&gt; initializeDb() async { // #1
+    Directory dir = await getApplicationDocumentsDirectory(); // #2
+    String path = dir.path + &#34;recipes.db&#34;;
+    var dbRecipes = await openDatabase(path, version: 1, onCreate: _createDb); // #3
+    return dbRecipes;
+  }
+</code></pre>
+<ol type="1">
+<li>async and await are from the async package.</li>
+<li>Directory is from the io package. getApplicationDocumentsDirectory is from the path_provider package and returns the directory for the documents of our app, which is different depending on the OS.</li>
+<li>If the database does not exist, it will create it by calling the _createDb function defined below:</li>
+</ol>
+<pre><code>  void _createDb(Database db, int newVersion) async {
+    await db.execute(
+        &#34;CREATE TABLE $tblRecipe($colId INTEGER PRIMARY KEY, $colTitle TEXT, &#34;
+            &#34;$colIngredients TEXT, $colSteps TEXT, $colDifficulty INTEGER, $colDate TEXT)&#34;);
+  }
+</code></pre>
+<p>To drop the table from the database, we defined the following method:</p>
+<pre><code>void dropDb() async {
+    await _db.execute(&#34;DROP TABLE $tblRecipe&#34;);
+  }
+</code></pre>
+<p>We also need to create the variable that will hold the database throughout the class along with a getter that initializes the database if it does not exist:</p>
+<pre><code>  static Database _db;
+
+  Future&lt;Database&gt; get db async {
+    if (_db == null) {
+      _db = await initializeDb();
+    }
+    return _db;
+  }
+</code></pre>
+<p>Finally, we will create the query methods:</p>
+<pre><code>  Future&lt;int&gt; insertRecipe(Recipe recipe) async { // #1
+    Database db = await this.db;
+    var result = await db.insert(tblRecipe, recipe.toMap());
+    return result;
+  }
+  
+  Future&lt;List&gt; getRecipes() async {
+    Database db = await this.db;
+    var result = await db.rawQuery(&#34;SELECT * FROM $tblRecipe&#34;);
+    return result;
+  }
+  
+  Future&lt;int&gt; getCount() async {
+    Database db = await this.db;
+    var result = Sqflite.firstIntValue(
+      await db.rawQuery(&#34;SELECT COUNT (*) FROM $tblRecipe&#34;)
+    );
+    return result;
+  }
+  
+  Future&lt;int&gt; updateRecipe(Recipe recipe) async {
+    var db = await this.db;
+    var result = await db.update(tblRecipe, recipe.toMap(),
+      where: &#34;$colId = ?&#34;, whereArgs: [recipe.id]);
+    return result;
+  }
+  
+  Future&lt;int&gt; deleteRecipe(int id) async {
+    int result;
+    var db = await this.db;
+    result = await db.rawDelete(&#34;DELETE FROM $tblRecipe WHERE $colId = $id&#34;);
+    return result;
+  }
+}
+</code></pre>
+<ol type="1">
+<li>The insert method should return the id of the record inserted in the database. If it is 0, then something went wrong.</li>
+</ol>
+<p>Until we will define the UI of the application, we can test that the database implementation is working by writing this code in the build method of class MyApp from main.dart file and running or debugging it:</p>
+<pre><code>    DbHelper helper = DbHelper();
+    helper.initializeDb().then((value) =&gt; helper.getRecipes().then((value) =&gt; print(value)));
+    DateTime today = DateTime.now();
+    Recipe recipe = Recipe(&#34;Apple pie&#34;, &#34;apples&#34;, &#34;1. Cut apples. 2. Bake apple pie&#34;,  today.toString());
+    helper.insertRecipe(recipe);
+    helper.getRecipes().then((value) =&gt; print(value));
+    helper.deleteRecipe(1);
+    helper.getRecipes().then((value) =&gt; print(value));
+</code></pre>
+<p>If we drop the table, we won&#39;t be able to create it again unless:</p>
+<ul>
+<li>we uninstall the application from the device;</li>
+<li>we specify a new version See <a href="https://stackoverflow.com/questions/60125391/flutter-sqlite-exception-no-such-table-sql-logic-error" target="_blank">this post</a> from stackoverflow for more details.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="The UI: ListView" duration="10">
+        <p>Now, it is time to implement the user interface of our recipe application. The first page is going to show a list with all the recipes that we have written so far, with the possibility of adding more. This can easily be implemented using a ListView.</p>
+<p>A ListView is a scrollable list of widgets arranged linearly. It is the most commonly used scrolling widget. It displays its children one after another in the scroll direction. More information about the ListView can be found <a href="https://api.flutter.dev/flutter/widgets/ListView-class.html" target="_blank">here</a> .</p>
+<p>We will also need a button to add a new recipe to the list. To implement this, we will use a FloatingActionButton. A FloatingActionButton is a circular icon button that hovers over content to promote a primary action in the application. This button will stay visible all the time, even when we scroll the items of the listview. More information about the FloatingActionButton can be found <a href="https://api.flutter.dev/flutter/material/FloatingActionButton-class.html" target="_blank">here</a> .</p>
+<p>We create a new file called recipelist.dart in the screens folder. In this file, we will write the first screen of our application.</p>
+<p>Next, we import the required packages:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;package:recipe_app/model/recipe.dart&#39;;
+import &#39;package:recipe_app/util/dbhelper.dart&#39;;
+import &#39;package:recipe_app/screens/recipedetail.dart&#39;;
+</code></pre>
+<p>We create the RecipeList class which extends a StatefulWidget and override the createState method:</p>
+<pre><code>class RecipeList extends StatefulWidget {
+  
+  @override
+  State&lt;StatefulWidget&gt; createState() =&gt; RecipeListState();
+}
+</code></pre>
+<p>We also need the state class:</p>
+<pre><code>class RecipeListState extends State {
+
+  @override
+  Widget build(BuildContext context) {} 
+}
+</code></pre>
+<p>In order to show the data to the screen, we first need to get it from the database. For this, we will use some private properties to maintain the state and methods to retrieve this data:</p>
+<pre><code>class RecipeListState extends State {
+
+  DbHelper dbHelper = DbHelper();
+  List&lt;Recipe&gt; recipes;
+  int count = 0;
+
+  void getData() {
+    final dbFuture = dbHelper.initializeDb();
+    dbFuture.then((result) {
+      final recipesFuture = dbHelper.getRecipes();
+      recipesFuture.then((result) {
+        List&lt;Recipe&gt; recipeList = List&lt;Recipe&gt;();
+        count = result.length;
+
+        for (int i = 0; i &lt; count; i++) {
+          recipeList.add(Recipe.fromObject(result[i]));
+          debugPrint(recipeList[i].title);
+        }
+
+        setState(() {
+          recipes = recipeList;
+          count = count;
+        });
+        debugPrint(&#34;Items &#34; + count.toString());
+      });
+    });
+  }
+</code></pre>
+<p>In the getData method, we initialize the database if it wasn&#39;t already, get all the recipes from it, convert them to Recipe objects and add them into a list which represents the input to the ListView widget that will show the recipes on the screen. We also update the count with the length of the result.</p>
+<p>Next, we implement the recipeListItems method which returns a ListView widget to display the recipes on the screen. The ListView is constructed using a builder method with itemCount set to count and itemBuilder set to a function that will be iterated for each item in the list.</p>
+<p>The itemBuilder method takes as parameters the BuildContext and an integer that represents the position in the list. This method returns a Card for each item of the list. A Card is a sheet of material with slightly rounded corners and a shadow. More details can be found <a href="https://api.flutter.dev/flutter/material/Card-class.html" target="_blank">here</a>.</p>
+<pre><code>ListView recipeListItems() {
+    return ListView.builder(
+        itemCount: count,
+        itemBuilder: (BuildContext context, int position) {
+          return Card(
+            color: Colors.white,
+            elevation: 2.0,
+            child: ListTile( // #1
+              leading: CircleAvatar( // #2
+                backgroundColor: getColor(this.recipes[position].difficulty),
+                child: Text(this.recipes[position].difficulty.toString())
+              ),
+              title: Text(this.recipes[position].title),
+              subtitle: Text(this.recipes[position].date),
+              onTap: () { // #3
+                debugPrint(&#34;Tapped on &#34; + this.recipes[position].id.toString());
+                navigateToDetail(this.recipes[position]);
+              },
+            ),
+          );
+        });
+  }
+</code></pre>
+<ol type="1">
+<li>The ListTile is a row that contains some text and a leading or trailing icon. <a href="https://api.flutter.dev/flutter/material/ListTile-class.html" target="_blank">More info here</a>.</li>
+<li>We will use as leading icon a CircleAvatar that will show the difficulty of the recipe both with a color and a number. <a href="https://api.flutter.dev/flutter/material/CircleAvatar-class.html" target="_blank">More info here</a>.</li>
+<li>onTap method catches the tap event that triggers whenever the user taps on one of the cards. We call the navigateToDetail method to navigate to the second screen which will show details about the recipe we tapped on.</li>
+</ol>
+<p>The getColor method is used to dynamically assign a color depending on the difficulty of the recipe:</p>
+<pre><code>Color getColor(int difficulty) {
+    switch(difficulty) {
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.yellow;
+      case 3:
+        return Colors.red;
+      default:
+        return Colors.yellow;
+    }
+  }
+</code></pre>
+<p>In the build method, if the recipes object is null (this happens when the screen is loaded the first time), we instantiate it as a new list of recipes and call the getData() method to retrieve the recipes from the database and fill the list with them.</p>
+<p>The build method will return a Scaffold widget, with the ListView defined by recipeListItems as body and a floatingActionButton to add more recipes. By pressing the floatingActionButton, we will navigate to the second screen of the app where we add the new recipe. This screen is also used to see the details of an already added recipe.</p>
+<pre><code>  @override
+  Widget build(BuildContext context) {
+    if (recipes == null) {
+      recipes = List&lt;Recipe&gt;();
+      getData();
+    }
+
+    return Scaffold(
+      body: recipeListItems(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigateToDetail(Recipe(&#39;&#39;, &#39;&#39;, &#39;&#39;, 1));
+        },
+        tooltip: &#34;Add new recipe&#34;,
+        child: new Icon(Icons.add),
+      ),
+    );
+  }
+</code></pre>
+<h2 is-upgraded>Navigation in Flutter</h2>
+<p>From this screen we will want to navigate to the second screen of the app to view, add or delete a recipe. In Flutter, navigation is based on a stack which contains the screens or pages that an app has used from the beginning. In order to change the page, an object named Navigator is used which has two methods that deal with the stack:</p>
+<ul>
+<li>the push method which puts a new page at the top of the stack. In order to use the push method, we need to specify the route, which is the page we want to load. Flutter has a MaterialPageRoute class that lets us choose the name of the page we want to push.</li>
+<li>the pop method removes the page from the screen so that the previous page from the stack becomes visible again.</li>
+</ul>
+<p>Both push and pop methods require the context to work.</p>
+<p>We can get to the second screen either by tapping on a Card or by pressing on the floating action button. Since both ways have the same steps, we will implement a method navigateToDetail to handle the navigation:</p>
+<pre><code>  void navigateToDetail(Recipe recipe) async {
+    bool result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) =&gt; RecipeDetail(recipe)));
+
+    if (result) {
+      getData();
+    }
+  }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="The UI: The Detail View" duration="10">
+        <p>The next step in defining the UI is to create the second screen that will show the details of a recipe. In this screen, the user will have the possibility to view, add or delete a recipe. We can get to this screen in two ways:</p>
+<ul>
+<li>by pressing the floating action button on the first screen in order to create a new recipe.</li>
+<li>by clicking on one of the items in the recipe list.</li>
+</ul>
+<p>As the name suggests, this screen will need a recipe when instantiated. For this, we will require the constructor to have a Recipe parameter.</p>
+<p>We create a new file called recipedetail.dart in the screens folder. As usual, we will import the required packages:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;package:recipe_app/model/recipe.dart&#39;;
+import &#39;package:recipe_app/util/dbhelper.dart&#39;;
+import &#39;package:intl/intl.dart&#39;; // #1
+</code></pre>
+<ol type="1">
+<li>The intl package is the internationalization package that will allow us to write the date of our recipe in the format we choose.</li>
+</ol>
+<p>The next step is to define some constants for the commands that we will use on a recipe. We will also define an instance of the DbHelper class:</p>
+<pre><code>DbHelper dbHelper = DbHelper();
+final List&lt;String&gt; commands = const &lt;String&gt; [
+  &#39;Save Recipe &amp; Back&#39;,
+  &#39;Delete Recipe&#39;,
+  &#39;Back to List&#39;
+];
+
+const menuSave = &#39;Save Recipe &amp; Back&#39;;
+const menuDelete = &#39;Delete Recipe&#39;;
+const menuBack = &#39;Back to List&#39;;
+</code></pre>
+<p>Then we define the RecipeDetail class which extends a StatefulWidget:</p>
+<pre><code>class RecipeDetail extends StatefulWidget {
+</code></pre>
+<p>This class will have a Recipe property named recipe:</p>
+<pre><code>  final Recipe recipe;
+</code></pre>
+<p>In the constructor, we will have a Recipe parameter:</p>
+<pre><code>  RecipeDetail(this.recipe);
+</code></pre>
+<p>Then, we override the createState method of the StatefulWidget and return the State class:</p>
+<pre><code>  @override
+  State&lt;StatefulWidget&gt; createState() =&gt; RecipeDetailState(recipe);
+}
+</code></pre>
+<p>Next, we define the RecipeDetailState class and its properties:</p>
+<pre><code>class RecipeDetailState extends State {
+  Recipe recipe;
+  RecipeDetailState(this.recipe);
+
+  final _difficulties = [&#34;Simple&#34;, &#34;Average&#34;, &#34;Hard&#34;]; // #1
+  String _difficulty = &#34;Average&#34;; // #2
+
+  TextEditingController titleController = TextEditingController(); // #3
+  TextEditingController ingredientsController = TextEditingController();
+  TextEditingController stepsController = TextEditingController();
+</code></pre>
+<ol type="1">
+<li>This property defines the possible values for the difficulty of a recipe.</li>
+<li>This is the default value for the recipe.</li>
+<li>We create a TextEditingController for each String property of the recipe model apart from the date.</li>
+</ol>
+<p>Then we implement the build method:</p>
+<pre><code>@override
+  Widget build(BuildContext context) {
+    titleController.text = recipe.title; // #1
+    ingredientsController.text = recipe.ingredients;
+    stepsController.text = recipe.steps;
+
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+    
+    return Scaffold(
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(recipe.title),
+            actions: &lt;Widget&gt;[
+              PopupMenuButton&lt;String&gt;( // #2
+                onSelected: (value) =&gt; select(value), // #3
+                itemBuilder: (BuildContext context) {
+                  return commands.map((String command) {
+                    return PopupMenuItem&lt;String&gt;(
+                      value: command,
+                      child: Text(command),
+                    );
+                  }).toList();
+                },
+              ),
+            ]),
+        body: Padding(
+            padding: EdgeInsets.only(top: 35.0, left: 10.0, right: 10.0),
+            child: ListView(children: &lt;Widget&gt;[
+              Column(
+                children: &lt;Widget&gt;[
+                  TextField(
+                    controller: titleController,
+                    style: textStyle,
+                    onChanged: (value) =&gt; this.updateTitle(),
+                    decoration: InputDecoration(
+                        labelText: &#34;Title&#34;,
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                      child: TextField(
+                        controller: ingredientsController,
+                        style: textStyle,
+                        maxLines: null, // #4
+                        onChanged: (value) =&gt; this.updateIngredients(),
+                        decoration: InputDecoration(
+                            labelText: &#34;Ingredients&#34;,
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 15.0),
+                      child: TextField(
+                        controller: stepsController,
+                        style: textStyle,
+                        maxLines: null,
+                        onChanged: (value) =&gt; this.updateSteps(),
+                        decoration: InputDecoration(
+                            labelText: &#34;Steps&#34;,
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                      )),
+                  ListTile(
+                      title: DropdownButton&lt;String&gt;(
+                        items: _difficulties.map((String value) {
+                          return DropdownMenuItem&lt;String&gt;(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        style: textStyle,
+                        value: retrieveDifficulty(recipe.difficulty),
+                        onChanged: (value) =&gt; convertDifficulty(value),
+                    ))
+                ],
+              )
+            ])));
+  }
+</code></pre>
+<ol type="1">
+<li>If the recipe contains data (for example when we click on an already existing recipe), we want to show it in the text field. To accomplish this, we assign to the text field of each controller the values of the corresponding fields from the recipe.</li>
+<li>PopupMenuButton displays a menu when pressed and calls onSelected when the menu is dismissed because an item was selected. The value passed to onSelected is the value of the selected menu item (<a href="https://api.flutter.dev/flutter/material/PopupMenuButton-class.html" target="_blank">More info here</a>).</li>
+<li>The onSelected event is triggered when the user selects a menu item.</li>
+<li>Setting maxLines to null allows the text field to grow vertically if the text is bigger than one line.</li>
+</ol>
+<p>The select method is called when the onSelected event is triggered. This method will execute the action defined by the command parameter:</p>
+<pre><code>  void select(String value) async {
+
+    switch (value) {
+      case menuSave:
+        save();
+        break;
+      case menuDelete:
+        delete();
+        break;
+      case menuBack:
+        Navigator.pop(context, true);
+        break;
+      default:
+    }
+  }
+</code></pre>
+<p>The save method will update the recipe if it already exists or else it will insert a new recipe in the database. Then it returns to the first screen of the application:</p>
+<pre><code>  void save() {
+  
+    recipe.date = new DateFormat.yMd().format(DateTime.now());
+
+    if (recipe.id != null) {
+      dbHelper.updateRecipe(recipe);
+    } else {
+      dbHelper.insertRecipe(recipe);
+    }
+
+    Navigator.pop(context, true);
+  }
+</code></pre>
+<p>The delete method deletes the recipe from the database if it exists. Then, it returns to the first screen and shows an alert dialog notifying the user that the recipe has been deleted:</p>
+<pre><code>  void delete() async {
+
+    int result;
+
+    Navigator.pop(context, true);
+    if (recipe.id == null) {
+      return;
+    }
+
+    result = await dbHelper.deleteRecipe(recipe.id);
+
+    if (result != 0) {
+      AlertDialog alertDialog = AlertDialog(
+        title: Text(&#34;Delete Recipe&#34;),
+        content: Text(&#34;The Recipe has been deleted&#34;),
+      );
+
+      showDialog(context: context, builder: (_) =&gt; alertDialog);
+    }
+  }
+</code></pre>
+<p>The convertDifficulty method converts the difficulty from its String meaning to an integer, while retrieveDifficulty converts the int value of the difficulty to its String meaning, by using the int parameter as index in the _difficulties array. For this to work, the values in the _difficulties array need to be arranged accordingly.</p>
+<pre><code>  void convertDifficulty(String value) {
+    switch (value) {
+      case &#34;Simple&#34;:
+        recipe.difficulty = 1;
+        break;
+      case &#34;Average&#34;:
+        recipe.difficulty = 2;
+        break;
+      case &#34;Hard&#34;:
+        recipe.difficulty = 3;
+        break;
+    }
+
+    setState(() {
+      _difficulty = value;
+    });
+  }
+
+  String retrieveDifficulty(int value) {
+    return _difficulties[value - 1];
+  }
+</code></pre>
+<p>The update methods are used to update the fields of the Recipe object with the values introduced in the TextEditingController text fields:</p>
+<pre><code>  void updateTitle() {
+    recipe.title = titleController.text;
+  }
+
+  void updateIngredients() {
+    recipe.ingredients = ingredientsController.text;
+  }
+
+  void updateSteps() {
+    recipe.steps = stepsController.text;
+  }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Putting it all together: The main.dart file" duration="5">
+        <p>It is now time to put together everything that we developed so far in the main.dart file. We replace the initial code with the following:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;package:recipe_app/screens/recipelist.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+      title: &#39;Recipes&#39;,
+      theme: ThemeData(primarySwatch: Colors.teal,),
+      home: MyHomePage(title: &#39;Recipes&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: Text(widget.title),
+      ),
+      body: RecipeList(),
+    );
+  }
+}
+</code></pre>
+<p>The final application should look like this:</p>
+<p class="image-container"><img alt="flutter app" src="img/4ebf99888aad092c.png"><img alt="flutter app" src="img/ffbe6cdefd29e6bf.png"><img alt="flutter app" src="img/a52f48b355f03c90.png"><img alt="flutter app" src="img/5f78f562bf6d8d1e.png"></p>
 
 
       </google-codelab-step>
