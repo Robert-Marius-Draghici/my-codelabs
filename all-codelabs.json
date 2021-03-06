@@ -4,9 +4,35 @@
     "format": "html",
     "prefix": "https://storage.googleapis.com",
     "mainga": "UA-49880327-14",
-    "updated": "2020-10-17T00:38:22+03:00",
+    "updated": "2021-03-05T23:51:42+02:00",
+    "id": "design-patterns-codelab",
+    "duration": 42,
+    "title": "Design Patterns",
+    "summary": "A codelab about Design Patterns",
+    "source": "design-patterns-codelab.md",
+    "theme": "",
+    "status": [
+      "draft"
+    ],
+    "category": [
+      "java"
+    ],
+    "tags": [
+      "java"
+    ],
+    "feedback": "https://github.com/robert-marius-draghici/my-codelabs/issues",
+    "url": "design-patterns-codelab",
+    "containsPresentation": false,
+    "containsDemo": false
+  },
+  {
+    "environment": "web",
+    "format": "html",
+    "prefix": "https://storage.googleapis.com",
+    "mainga": "UA-49880327-14",
+    "updated": "2020-11-28T20:39:55+02:00",
     "id": "flutter-tutorial",
-    "duration": 47,
+    "duration": 160,
     "title": "Flutter tutorial",
     "summary": "A step by step tutorial for creating Flutter applications.",
     "source": "flutter-codelab.md",
